@@ -1,0 +1,205 @@
+/* write your css here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+.button {
+    background: linear-gradient(118.19deg, #1FA2FF -3.62%, #12D8FA 50.44%, #A6FFCB 104.51%),
+        linear-gradient(0deg, #F1F2FF, #F1F2FF);
+
+
+}
+
+.white-shadow {
+
+    box-shadow: 10px 10px 0px white;
+}
+.reverse-white-shadow {
+
+    box-shadow: -10px -10px 0px white;
+}
+.yellow-shadow {
+    box-shadow: 6px 6px 0px #FFD60A;
+}
+@media screen and (min-width:1065px) {
+    .yellow-shadow {
+        box-shadow: 10px 10px 0px #FFD60A;
+    }
+ }
+.border-top-dashed{
+    border-top: 1px dashed #999DAA;
+}
+
+.blue-shadow{
+    box-shadow: 0px -6px 55px #47A5C5;
+}
+.pink-shadow{
+    box-shadow: 0px -6px 55px #f77e9a;
+}
+
+.banner-video::before {
+    content: '';
+    height: 100px;
+    width: 200px;
+    box-shadow: 0px -6px 55px #47A5C5;
+    position: absolute;
+    top: 8px;
+    left:20%;
+    z-index: -1;
+
+}
+.about-img::before {
+    content: '';
+    height: 100px;
+    width: 200px;
+    box-shadow: 20px -20px 20px 10px red;
+    position: absolute;
+    
+    z-index: -1;
+
+}
+.orange-gradient  {
+
+}
+@media screen and (min-width:640px) {
+    .banner-video::before{
+     left:35%;
+     width: 300px;
+    }
+ }
+@media screen and (min-width:768px) {
+    .white-shadow {
+
+        box-shadow: 20px 20px 0px white;
+    }
+   
+ }
+@media screen and (min-width:850px) {
+
+    .reverse-white-shadow {
+
+        box-shadow: -20px -20px 0px white;
+    }
+ }
+
+.pink-gradient {
+    background: rgb(243, 114, 144);
+    background: radial-gradient(circle, rgba(243, 114, 144, 0.24131650951396189) 13%, rgba(0, 8, 20, 1) 80%);
+}
+
+.yellow-gradient {
+    background: rgb(255, 249, 112);
+    background: radial-gradient(circle, rgba(255, 249, 112, 0.2721288344439339) 11%, rgba(0, 8, 20, 1) 80%);
+}
+
+.homepage_bg{
+    background: url("./assets/Images/bghome.svg");
+}
+
+.border-div{
+    border-right: 2px dotted #999DAA;
+    
+}
+.border-animation {
+    display: inline-block;
+    color: #FFE83D;
+}
+
+.border-animation::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #FFE83D;
+    transition: width .6s;
+}
+
+.border-animation:hover::after {
+    width: 100%;
+    
+}
+.res-gradient{
+    background: rgb(0,27,34);
+    background: linear-gradient(150deg, rgba(0,27,34,1) 72%, rgba(0,212,255,0.7343137083935136) 100%);  
+}
+
+.label-style {
+    @apply text-[14px] text-richblack-5 flex flex-col gap-2;
+  }
+  .form-style {
+    @apply rounded-lg  text-[16px] leading-[24px] text-richblack-5 placeholder:text-richblack-400 focus:outline-none;
+  }
+
+  .input-style {
+    @apply  bg-richblack-800 p-3 rounded-lg text-richblack-5 shadow-sm shadow-richblack-200
+  }
+
+  .back-login{
+    @apply flex items-center gap-2 text-[16px] text-richblack-100 hover:text-richblack-5 transition-all duration-300
+  }
+ 
+
+.custom-loader {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: 
+      radial-gradient(farthest-side,#766DF4 94%,#0000) top/8px 8px no-repeat,
+      conic-gradient(#0000 30%,#766DF4);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+    animation:s3 1s infinite linear;
+  }
+  
+  @keyframes s3{ 
+    100%{transform: rotate(1turn)}
+  }
+
+.animation-left {
+    animation-name: left;
+    animation-duration: 0.7s;
+}
+
+  @keyframes left {
+    0% {left:-100%}
+    100% {left :2px}
+  }
+
+
+  .animation-right{
+    animation-name: right;
+    animation-duration: 0.7s;
+}
+
+
+  @keyframes right {
+    0% {right:-100%}
+    100% {right: 1px}
+  }
+
+
+
+
+
+
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+
+
