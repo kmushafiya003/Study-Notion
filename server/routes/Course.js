@@ -12,7 +12,7 @@ const {auth , isStudent , isInstructor , isAdmin} = require('../middlewares/auth
 
 //Course 
 
-const {createCourse , showAllCourse , getCourseDetails} = require('../controllers/Course');
+const {createCourse , getAllCourses , getCourseDetails , getFullCourseDetails , editCourse , getInstructorCourses , deleteCourse ,} = require('../controllers/Course');
 
 // Category 
 
@@ -36,8 +36,14 @@ const {createSubSection , updateSubSection , deleteSubSection} = require('../con
 // ********************************************************************************************************
 
 router.post("/createCourse" , auth , isInstructor , createCourse);
-router.get("/showAllCourse" , showAllCourse);
+router.get("/getAllCourses" , getAllCourses);
 router.post("/getCourseDetails" , getCourseDetails);
+
+
+router.post("/getFullCourseDetails", auth, getFullCourseDetails)
+router.post("/editCourse", auth, isInstructor, editCourse)
+router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
+router.delete("/deleteCourse", deleteCourse)
 
 router.post("/createSection" , auth , isInstructor , createSection);
 router.post("/updateSection" , auth , isInstructor , updateSection);

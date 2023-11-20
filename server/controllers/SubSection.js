@@ -10,9 +10,9 @@ exports.createSubSection = async (req, res) => {
     try {
 
         //fetch all data of subsection from req body
-        const { title, description, sectionId } = req.body;
+        const { sectionId , title , description } = req.body;
 
-        console.log("Request file : " , req.file);
+   
 
         //fetch video from req.body
         const video = req.files.videoFile;
@@ -20,7 +20,7 @@ exports.createSubSection = async (req, res) => {
         //validation
         
 
-        if (!title  || !description || !sectionId.Id || !video ) {
+        if (!title  || !description || !sectionId || !video ) {
             console.log("All fields are required");
             return res.status(400).json({
                 success: false,
@@ -47,16 +47,16 @@ exports.createSubSection = async (req, res) => {
             $push: {
                 subSection: subSectionDetail._id
             }
-        }, { new: true }).populate("subSection").exec();
+        }, { new: true }).populate("subSection");
 
         //return response
 
         return res.status(200).json({
             success: true,
             message: "SubSection Created Successfully ",
-            updatedSection,
+            data : updatedSection,
             subSectionDetail,
-
+            
         })
 
     } catch (err) {
@@ -75,7 +75,7 @@ exports.updateSubSection = async (req, res) => {
     try {
         //fetch the updated Data with subScetion ID
 
-        const { title, description, subSectionId } = req.body;
+        const {sectionId ,title, description, subSectionId } = req.body;
 
         const subSection = await SubSection.findById(subSectionId);
 
@@ -107,12 +107,14 @@ exports.updateSubSection = async (req, res) => {
         //update on DB
         await subSection.save();
 
+        const updatedSection = await Section.findById(sectionId).populate("subSection").exec()
+
         //return response
 
         res.status(200).json({
             success: true,
             message: "SubSection Updated Successfully",
-            subSection,
+            data : updatedSection 
         })
 
     } catch (err) {
@@ -165,11 +167,15 @@ exports.deleteSubSection = async(req , res) => {
 
             await SubSection.findByIdAndDelete(subSectionId);
 
+            const updatedSection = await Section.findById(sectionId).populate("subSection").exec();
+
              
 
             res.status(200).json({
+              
                 success: true,
                 message: "SubSection Deleted Successfully",
+                data : updatedSection ,
             })
 
 

@@ -1,5 +1,6 @@
 const Section = require('../models/Section');
 const Course = require('../models/Course');
+const SubSection = require('../models/SubSection');
 const mongoose = require('mongoose');
 
 
@@ -72,10 +73,10 @@ exports.createSection = async(req , res)=>{
 exports.updateSection = async(req ,res) =>{
     try{
         //fetch data
-        const {sectionName , sectionId} = req.body;
+        const {sectionName , sectionId , courseId} = req.body;
 
         //validation
-        if(!sectionName , !sectionId){
+        if(!sectionName || !sectionId || !courseId ){
 
             console.log("All fields are required");
             res.status(400).json({
@@ -91,13 +92,24 @@ exports.updateSection = async(req ,res) =>{
             sectionName
         }, {new : true})
 
+        const updatedCourse = await Course.findById(courseId)
+        .populate({
+            path : "courseContent",
+            populate : {
+                path : "subSection"
+            }
+        }).exec()
+            
+        
+
 
         //return response
 
         return res.status(200).json({
             success : true,
             message : "Section Updated Successfully",
-            data : updateSection,
+           updateSection,
+           data : updatedCourse,
         })
 
 
@@ -119,27 +131,53 @@ exports.deleteSection = async(req ,res) => {
        //fetch id
        const {sectionId , courseId} = req.body;
 
-       //delete from DB
-
-        await Section.findByIdAndDelete(sectionId);
+    
 
         //TODO[Testing] : Do we NEED to delete the entry from the course Schema ??
 
-        cId = new mongoose.Types.ObjectId(courseId);
+        // cId = new mongoose.Types.ObjectId(courseId);
 
-        await Course.findByIdAndUpdate({_id : cId} , {
+        const updatedCourse = await Course.findByIdAndUpdate({_id : courseId} , {
             $pull : {
                 courseContent : sectionId,
             }
         } , {new : true});
 
+
+        const section = await Section.findById(sectionId);
+
+
+        if(!section){
+            console.log("Section nhi hai");
+            return res.status(400).json({
+                success : false,
+                message : "Section Not Found"
+            })
+        }
+
+        //delete all the lecture which belongs to this section
+
+         await SubSection.deleteMany({_id : {$in : section.subSection}});
+
+           //delete from DB
+
+           await Section.findByIdAndDelete(sectionId);
+
         //return response
+
+        const course = await Course.findById(courseId).populate({
+            path : "courseContent" ,
+            populate : {
+                path : "subSection"
+            }
+        }).exec();
 
     
         
         return res.status(200).json({
             success : true,
-            message : "Section Deleted Successfully"
+            message : "Section Deleted Successfully",
+            data : course,
         })
 
    }catch(err){

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { useState } from 'react'
@@ -28,6 +28,8 @@ const CourseBuilderForm = () => {
 
   } = useForm();
 
+
+
   const dispatch = useDispatch()
 
   const { course } = useSelector((state) => state.course);
@@ -37,6 +39,11 @@ const CourseBuilderForm = () => {
 
   const { token } = useSelector((state) => state.auth);
 
+  useEffect(()=> {
+    console.log("Course : " , course);
+  }, [])
+
+
 
   //submit handler
   const onSubmit = async (data) => {
@@ -45,6 +52,7 @@ const CourseBuilderForm = () => {
 
     setLoading(true);
     let result;
+
 
     //if we are editing the section Name
     if (editSectionName) {
@@ -59,6 +67,7 @@ const CourseBuilderForm = () => {
         token
       )
 
+  
 
     }
 
@@ -81,7 +90,7 @@ const CourseBuilderForm = () => {
 
       dispatch(setCourse(result));
       setEditSectionName(null);
-      setValue("section", "");
+      setValue("sectionName", "");
     }
 
 
@@ -208,8 +217,9 @@ const CourseBuilderForm = () => {
 
 
       {/* --------------- Nested View ------------------- */}
+
       {
-        course.courseContent.length > 0 && (
+        course?.courseContent?.length > 0 && (
 
           <NestedView handleChangeEditSectionName = {handleChangeEditSectionName} />
 
@@ -219,15 +229,15 @@ const CourseBuilderForm = () => {
 
 
 
-
       {/* --------------- Buttons  ------------------- */}
+      
       <div className='flex justify-end gap-x-6'>
 
         {/* ------------- Back Button ------------------ */}
 
         <button
           onClick={goBack}
-          className='rounded-lg cursor-pointer font-semibold flex-items-center px-3 py-2 bg-richblack-600 text-richblack-900'
+          className='rounded-lg cursor-pointer font-semibold flex-items-center sm:text-[16px] text-sm py-2 xxs:px-3 px-2 bg-richblack-600 text-richblack-900'
         >
           Back
         </button>

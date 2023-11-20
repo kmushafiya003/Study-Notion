@@ -26,6 +26,8 @@ const Upload = ({
     )
 
 
+
+
     useEffect(()=> {
 
         register(name , { required : true});
@@ -56,7 +58,7 @@ const Upload = ({
 
     
     const previewFile = (file) => {
-        console.log(file);
+    
         const reader = new FileReader();
         reader.readAsDataURL(file);
 
@@ -64,7 +66,7 @@ const Upload = ({
         setPreviewSource(reader.result);
        }
 
-       console.log("Reader result : " , reader.result);
+      
     }
 
 
