@@ -124,7 +124,7 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
 
                                 subLinks.map((subLink, index) => {
                                     return (
-                                        <Link to={"/"} key={index} className='rounded-lg bg-transparent py-1 px-2 hover:bg-blue-200 hover:text-richblack-900 hover:shadow-md hover:shadow-richblack-700 transition-all duration-300'>
+                                        <Link to={"/"} key={index} className='rounded-lg bg-transparent py-1 pl-2 pr-10 hover:bg-blue-200 hover:text-richblack-900 hover:shadow-md hover:shadow-richblack-700 transition-all duration-300'>
                                             {subLink.name}
                                         </Link>
                                     )
