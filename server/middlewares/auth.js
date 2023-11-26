@@ -6,6 +6,7 @@ require("dotenv").config();
 exports.auth = async(req ,res , next) =>{
     try{
 
+        console.log("Auth middleware mei")
         //extract token
         const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer " , "");
 

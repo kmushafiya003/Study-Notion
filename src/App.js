@@ -20,6 +20,9 @@ import Cart from "./components/core/Dashboard/Student/Cart/index";
 import { ACCOUNT_TYPE } from "./utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import MyCourses from "./components/core/Dashboard/Instructor/MyCourses.jsx";
+import EditCourse from "./components/core/Dashboard/Instructor/EditCourse/index.js";
+
 
 //agr kuch hua to yaha error hai
 import AddCourse from "./components/core/Dashboard/Instructor/AddCourse.jsx";
@@ -108,6 +111,10 @@ function App() {
               <>
 
                 <Route path="/dashboard/add-course" element={<AddCourse />} />
+                <Route path="/dashboard/my-courses" element={<MyCourses />}/>
+                <Route path="/dashboard/edit-course/:courseId" element={<EditCourse />}/>
+               <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
+               
            
 
               </>

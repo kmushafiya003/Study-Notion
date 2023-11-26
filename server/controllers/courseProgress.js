@@ -1,5 +1,5 @@
-import CourseProgress from "../models/CourseProgress";
-import SubSection from "../models/SubSection";
+const CourseProgress = require( "../models/CourseProgress");
+ const SubSection = require( "../models/SubSection");
 
 
 exports.updateCourseProgress = async (req, res) => {
@@ -93,8 +93,8 @@ exports.updateCourseProgress = async (req, res) => {
 
         return res.status(500).json({
             success: false,
-            message: "Error while updating the courseprogress"
-            error: err.message,
+            message: "Error while updating the courseprogress",
+            error : err.message,
 
         })
     }

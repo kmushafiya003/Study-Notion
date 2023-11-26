@@ -1,11 +1,11 @@
 const Course = require('../models/Course');
 const Category = require('../models/Category')
+const CourseProgress = require('../models/CourseProgress');
 const User = require('../models/User');
 const { uploadImagetoCloudinary } = require('../utils/imageUploader');
-import CourseProgress from '../models/CourseProgress';
-import Section from '../models/Section';
-import SubSection from '../models/SubSection';
-import { convertSecondsToDuration } from '../utils/secToDuration';
+const Section = require('../models/Section');
+const SubSection =  require('../models/SubSection');
+const { convertSecondsToDuration } = require ('../utils/secToDuration');
 
 //create Course
 
@@ -68,6 +68,9 @@ exports.createCourse = async (req, res) => {
 
         const thumbnailImage = await uploadImagetoCloudinary(thumbnail, process.env.FOLDER_NAME);
 
+
+        
+
         //create and entry for new course
 
         const newCourse = await Course.create({
@@ -76,11 +79,11 @@ exports.createCourse = async (req, res) => {
             instructor: instructorDetails._id,
             whatYouWillLearn,
             price,
-            tag,
+            tag ,
             category: categoryDetails._id,
             thumbnail: thumbnailImage.secure_url,
             status: status,
-            instructions: instructions,
+            instructions,
         });
 
         //Add the new course to the user schema of Instructor
@@ -159,9 +162,10 @@ exports.getAllCourses = async (req, res) => {
 exports.editCourse = async (req, res) => {
     try {
 
+        console.log("Edit Course api");
         const {courseId} = req.body;
         const updates = req.body ;
-
+              console.log("course Id ", courseId)
         console.log("Updates : " , updates);
 
         const course = await Course.findById(courseId);
@@ -310,7 +314,7 @@ exports.getFullCourseDetails = async (req, res) => {
 
         //now call the db for course and save it on the variable 
 
-        const courseDetails = await Course.findByIdAndRemove({
+        const courseDetails = await Course.findOne({
             _id : courseId,
         })
         .populate({
@@ -343,7 +347,7 @@ exports.getFullCourseDetails = async (req, res) => {
         if(!courseDetails){
             console.log("Course not found with the given ID");
 
-            return res.sttaus(404).json({
+            return res.status(404).json({
                 success : false,
                 message : "Course Not found"
             })
@@ -467,7 +471,7 @@ exports.deleteCourse = async(req , res) => {
 
         // delete the sections and subsection from the course
 
-        const Coursesections = course.sections ;
+        const Coursesections = course. courseContent;
 
         for(const sectionId of Coursesections ){
 
@@ -514,4 +518,92 @@ exports.deleteCourse = async(req , res) => {
           error: error.message,
         })
     }
+}
+
+
+//delete all courses
+
+exports.deleteAllCourses = async(req ,res) => {
+    try{
+
+        const instructorId = req.user.id  ;
+
+        console.log("Instructor Id : " , instructorId)
+
+        const instructorCourses = await Course.find({
+            instructor : instructorId 
+        });
+
+        console.log("Instructor all courses : " , instructorCourses);
+
+
+        //going to each course of instructor for deleting
+
+        for(const course of instructorCourses){
+
+
+            console.log("Course in instructorCourses : " , course);
+
+             //delete the students enrolled in a course
+
+
+            const studentsEnrolled = course.studentsEnrolled;
+
+            for(const studentsId of studentsEnrolled){
+                await User.findByIdAndUpdate(studentsId , {
+                    $pull : {
+                        courses : course._id ,
+                    }
+                })
+            }
+
+             //delete the section and subSection
+
+             const courseSection = course.courseContent ;
+
+             for(const sectionId of courseSection){
+
+                 const section = await Section.findById(sectionId);
+
+                 if(section) {
+                    const subSections = section.subSection ;
+
+                    for(const subSectionId of subSections){
+
+                        await SubSection.findByIdAndDelete(subSectionId)
+
+                    }
+                 }
+
+                 await Section.findByIdAndDelete(sectionId);
+
+
+             }
+
+
+              //now delete all the courses
+
+              await Course.findByIdAndDelete(course._id);
+
+
+
+        }
+
+        //return response
+
+        return res.status(200).json({
+            success : true,
+            message : "Successfully deleted all courses",
+        })
+
+
+    }catch(err){
+        console.log("There is a problem while deleting all courses");
+        return res.status(500).json({
+            success : false,
+            message : "Problem while deleting all courses",
+            error : err.message
+        })
+    }
+    
 }

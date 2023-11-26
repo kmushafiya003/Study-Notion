@@ -14,6 +14,8 @@ const CodeBlocks = ({
        md:gap-10 sm:gap-8 gap-5 relative  px-0 md:px-5
       `}>
 
+        
+
         {/* -------------------------Section 1 ------------------------ */}
         <div className='md:w-[45%] sm:w-[80%] w-[90%] mx-auto md:mx-0 flex flex-col gap-6'>
 

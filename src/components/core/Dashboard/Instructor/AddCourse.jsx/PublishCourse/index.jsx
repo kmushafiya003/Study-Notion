@@ -36,14 +36,14 @@ const PublishCourse = () => {
 
     const goToCourse = () => {
         dispatch(resetCourse());
-        // navigate("/dashboard/my-courses");
+        navigate("/dashboard/my-courses");
     }
 
     const handleCoursePublish = async() => {
 
         //if form is not updated
         if (course?.status === COURSE_STATUS.PUBLISHED && getValues("public") === true  || 
-        (course.status === COURSE_STATUS.DRAFT && getValues("public") === "false")
+        (course?.status === COURSE_STATUS.DRAFT && getValues("public") === false )
         ) {
             //no updation in form
             //no need to call API

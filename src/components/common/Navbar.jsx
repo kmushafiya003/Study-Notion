@@ -99,7 +99,7 @@ const Navbar = () => {
                   <li key={index}>
                     {
                       link.title === "Catalog" ?
-                        (<div className='flex items-center gap-2 group  relative h-full'>
+                        (<div className='flex items-center gap-2 group  relative h-full '>
                           <p className={` cursor-pointer text-richblack-25 group-hover:text-richblack-5 transition-all duration-200`}>
                             {link.title}
                           </p>
@@ -107,13 +107,14 @@ const Navbar = () => {
 
                           {/* -------------- dropdown ------------------- */}
 
-                          <div className='invisible absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[30%] flex flex-col gap-2 rounded-lg text-[15px] font-semibold bg-white p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-[300px] z-10'>
+                          <div className='invisible absolute left-[50%] top-[30%] translate-x-[-50%] translate-y-[13%] flex flex-col gap-1 rounded-lg text-[15px] font-semibold bg-white p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-[280px] z-10'>
 
 
                             {/* -------------------  triangle shape ------------------ */}
 
                             <div className='absolute left-[57%] top-0 translate-y-[-35%] bg-white h-6 w-6 rotate-45 rounded'>
                             </div>
+                            
 
                             {
                               subLinks.length ? (
@@ -123,7 +124,11 @@ const Navbar = () => {
 
                                   //Have to mention the path of catalog
                                   return (
-                                    <Link to={"/"} key={index} className='hover:text-blue-300'>
+                                    <Link to={`/catalog/${subLink.name
+                                      .split(" ")
+                                      .join("-")
+                                      .toLowerCase()}`}
+                                       key={index} className='rounded-lg bg-transparent py-3 pl-4 hover:bg-richblack-50'>
                                       {subLink.name}
                                     </Link>
                                   )

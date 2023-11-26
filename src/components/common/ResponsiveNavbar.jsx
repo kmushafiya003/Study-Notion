@@ -111,20 +111,20 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
 
                 {/* ---------------------------------  catalogue slide ------------------ */}
 
-                <div className={` visible sm:invisible bg-richblack-900 text-richblack-25  shadow shadow-richblack-600  border border-richblack-600 absolute xs:w-[350px] w-[250px]  top-2  rounded-lg text-xl min-h-[500px]   z-50 
+                <div className={` visible sm:invisible bg-richblack-900 text-richblack-25  shadow shadow-richblack-600  border border-richblack-600 absolute xs:w-[350px] w-[250px]  top-2  rounded-lg text-xl min-h-[550px]   z-50 
               ${openCatalogue ? "right-2" : "right-[-500%]"}
               transition-all duration-500 flex flex-col
             ` } >
                     <div className='w-full  flex justify-start mt-5 ml-5 cursor-pointer text-2xl hover:text-yellow-25' onClick={clickHandler}>
                         <RiCloseLine className='mr-5'></RiCloseLine>
                     </div>
-                    <div className='flex flex-col items-center gap-5  w-full h-full xs:text-lg text-[16px]'>
+                    <div className='flex flex-col pl-16 items-start gap-y-4  w-full h-full xs:text-lg text-[16px]'>
                         {
                             subLinks.length ? (
 
                                 subLinks.map((subLink, index) => {
                                     return (
-                                        <Link to={"/"} key={index} className='hover:text-blue-300'>
+                                        <Link to={"/"} key={index} className='rounded-lg bg-transparent py-1 px-2 hover:bg-blue-200 hover:text-richblack-900 hover:shadow-md hover:shadow-richblack-700 transition-all duration-300'>
                                             {subLink.name}
                                         </Link>
                                     )
