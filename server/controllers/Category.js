@@ -1,5 +1,9 @@
 const Category = require('../models/Category')
 
+function getRandomInt(max){
+    return Math.floor(Math.random() * max);
+}
+
 //create Category-> handler function
 
 exports.createCategory = async (req, res) => {
@@ -101,14 +105,14 @@ exports.getCategoryPageDetails = async(req , res) => {
 
         //Handle case when there are no courses
 
-        if(!selectedCategory.courses.length === 0){
-            console.log("No Courses found for this category");
-            return res.status(404).json({
-                success : false,
-                message : "No Courses found for this category",
+        // if(!selectedCategory.courses.length === 0){
+        //     console.log("No Courses found for this category");
+        //     return res.status(404).json({
+        //         success : false,
+        //         message : "No Courses found for this category",
 
-            })
-        }
+        //     })
+        // }
 
         console.log("Selected Category : " , selectedCategory);
 

@@ -143,6 +143,9 @@ body {
   .back-login{
     @apply flex items-center gap-2 text-[16px] text-richblack-100 hover:text-richblack-5 transition-all duration-300
   }
+  .section_heading {
+    @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
+  }
  
 
 .custom-loader {
