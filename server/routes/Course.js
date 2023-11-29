@@ -64,7 +64,7 @@ router.post("/deleteSubSection" , auth , isInstructor , deleteSubSection)
 //                                      Category Routes
 // ********************************************************************************************************
 
-router.post("/createCategory" , auth , isAdmin , createCategory);
+router.post("/createCategory" , createCategory);
 router.get("/showAllCategory" , showAllCategory);
 router.post("/getCategoryPageDetails" , getCategoryPageDetails);
 

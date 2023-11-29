@@ -5,6 +5,7 @@ import { apiConnector } from '../services/apiConnector';
 import { categories } from '../services/apiLinks';
 import { getCatalogPageData } from '../services/operations/CatalogCourse';
 import CourseSlider from '../components/core/Category/CourseSlider';
+import CourseCard from '../components/core/Category/CourseCard';
 
 const Catalog = () => {
 
@@ -95,7 +96,7 @@ const Catalog = () => {
               {/* ------------- Courses ------------------------- */}
 
               <div>
-              <CourseSlider courses={catalogPageData?.selectedCategory?.courses}  />
+                <CourseSlider courses={catalogPageData?.selectedCategory?.courses} />
               </div>
 
             </div>
@@ -124,10 +125,20 @@ const Catalog = () => {
 
             {/* --------------- courses  ----------------- */}
 
-            <div className='py-8'>
+            <div className='py-8 border border-yellow-300'>
 
-              <div className='grid'> </div>
- 
+              <div className='grid grid-cols-1 lg:grid-cols-2 border border-pink-400'>
+
+                {
+                  catalogPageData?.mostSellingCourses.slice(0,6).map((course , index) => (
+                    <CourseCard course={course} key={index} Height={"h-[400px]"} />
+                  ))
+
+                }
+
+
+              </div>
+
 
             </div>
 

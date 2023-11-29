@@ -17,7 +17,7 @@ exports.sendOTP = async (req, res) => {
         //1.fetch email from request body
 
         const { email } = req.body;
-        console.log("Email fro OTP : ", email);
+        console.log("Email for OTP : ", email);
 
         //2.check is user is already Exist
 
@@ -154,20 +154,20 @@ exports.signup = async (req, res) => {
         if (!recentOtp) {
             //OTP NOT FOUND
 
-            console.log("OTP not Found 1")
+            console.log("OTP not Found ")
             return res.json({
                 success: false,
-                message: "OTP not Found 1"
+                message: "OTP not Found "
             })
         }
 
 
         if (recentOtp.length === 0) {
             //OTP NOT FOUND
-            console.log("OTP not Found 2")
+            console.log("OTP not Found ")
             return res.json({
                 success: false,
-                message: "OTP not Found 2"
+                message: "OTP not Found "
             })
         }
 
