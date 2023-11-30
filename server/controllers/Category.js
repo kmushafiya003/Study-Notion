@@ -1,6 +1,6 @@
 const Category = require('../models/Category')
 
-function getRandomInt(max){
+function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
@@ -55,7 +55,7 @@ exports.showAllCategory = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "Successfully all Category are fetched",
-            data : allCategory,
+            data: allCategory,
         })
 
     } catch (err) {
@@ -72,125 +72,131 @@ exports.showAllCategory = async (req, res) => {
 
 //categoryPageDetails
 
-exports.getCategoryPageDetails = async(req , res) => {
-    try{
+exports.getCategoryPageDetails = async (req, res) => {
+    try {
 
- // for selected category (data 1)
+        // for selected category (data 1)
 
         //fetch the categoryId from req body
-        const {categoryId} = req.body ;
+        const { categoryId } = req.body;
 
         //Now call the Category with given ID and also courses and rattingAndReviews from DB
 
         const selectedCategory = await Category.findById(categoryId)
-                                             .populate({
-                                                path : "courses",
-                                                match : {status : "Published"},
-                                                populate : {
-                                                    path : "ratingAndReviews"
-                                                }
-                                             })
-                                             .exec();
+            .populate({
+                path: "courses",
+                match: { status: "Published" },
+                populate: {
+                    path: "ratingAndReviews"
+                }
+            })
+            .exec();
 
         //Handle case when category not found with the given ID
 
-        if(!selectedCategory){
+        if (!selectedCategory) {
             console.log("Category not found with the given ID");
             return res.status(404).json({
-                success : false,
-                message : "Category not found with the given ID",
+                success: false,
+                message: "Category not found with the given ID",
 
             })
         }
 
         //Handle case when there are no courses
 
-        // if(!selectedCategory.courses.length === 0){
-        //     console.log("No Courses found for this category");
-        //     return res.status(404).json({
-        //         success : false,
-        //         message : "No Courses found for this category",
+        if (!selectedCategory.courses.length === 0) {
+            console.log("No Courses found for this category");
+            return res.status(404).json({
+                success: false,
+                message: "No Courses found for this category",
 
-        //     })
-        // }
+            })
+        }
 
-        console.log("Selected Category : " , selectedCategory);
+        console.log("Selected Category : ", selectedCategory);
 
 
 
-    //for differentOneRandomCategory --------> (data 2)    
+        //for differentOneRandomCategory --------> (data 2)    
 
         //Get  other categories execpt selected one
 
         const categoriesExceptSelected = await Category.find({
-            _id : {$ne : categoryId}
+            _id: { $ne: categoryId }
         });
 
-      
+
         //Now choose any different random category
 
         const differentCategory = await Category.findOne(
             categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]._id
         )
-        .populate({
-            path:"courses",
-            match : {status : "Published"},
-           populate : {
-            path : "ratingAndReviews"
-           }
-        })
-        .exec()
+            .populate({
+                path: "courses",
+                match: { status: "Published" },
+                populate: {
+                    path: "ratingAndReviews"
+                }
+            })
+            .exec()
 
-        console.log("Different Category : " , differentCategory);
+        console.log("Different Category : ", differentCategory);
 
 
-   //for mostSellingCourse ------------> data(3) 
-   
-   
+        //for mostSellingCourse ------------> data(3) 
+
+
         //fetch all categories present in DB
 
         const allCatgeories = await Category.find()
-                                .populate({
-                                    path : "courses",
-                                    match : {status : "Published"} ,
-                                   populate : {
-                                    path : "ratingAndReviews"
-                                   }
-                                })
+            .populate({
+                path: "courses",
+                match: { status: "Published" },
+                populate: {
+                    path: "ratingAndReviews"
+                   
+                }
+            })
+            .exec();
+       
 
         //Now extract all the courses by using flat map on allCategory
 
-        const allCourses = allCatgeories.flatMap((category)=> category.courses);
+        const allCourses = allCatgeories.flatMap((category) => category.courses)
+            ;
 
 
         //Its time to find most selling courses
 
         const mostSellingCourses = allCourses
-                                .sort((a , b) => b.sold - a.sold)
-                                .slice(0 , 10);
+            .sort((a, b) => b.sold - a.sold)
+            .slice(0, 10);
 
-         console.log("Most Selling Courses : " , mostSellingCourses)                       
+
+
+        console.log("Most Selling Courses : ", mostSellingCourses)
 
         //return response
 
         return res.status(200).json({
-            success : true ,
-            data : {
-                selectedCategory ,
+            success: true,
+            data: {
+                selectedCategory,
                 differentCategory,
                 mostSellingCourses,
             }
         })
 
 
-    }catch(err){
+    } catch (err) {
         console.log("An error occur on categoryPageDetail");
 
         return res.status(500).json({
-            success : false ,
-            message : "An error occur on categoryPageDetail",
-            error : err.message
+            success: false,
+            message: "An error occur on categoryPageDetail",
+            error: err.message
         })
-     
+
     }
 }

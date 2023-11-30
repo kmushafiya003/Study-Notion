@@ -63,7 +63,7 @@ const Catalog = () => {
       {/* ---------------------------- Upper part  --------------------------- */}
       <div className='relative bg-richblack-800  max-w-maxContent  text-richblack-100  '>
 
-        <div className=' mx-auto  lg:w-10/12 w-[95%] flex flex-col gap-y-3  py-16 '>
+        <div className=' mx-auto  lg:w-10/12 w-[95%] flex flex-col gap-y-8  py-14 '>
 
           <p className="text-sm text-richblack-300">{`Home / Catalog / `}
             <span className='text-yellow-25'>{catalogPageData?.selectedCategory.name}</span></p>
@@ -109,10 +109,13 @@ const Catalog = () => {
           <section className='lg:w-10/12 w-[95%] mx-auto max-w-maxContent relative flex flex-col pb-12 '>
 
             {/* ---------------- header ------------------ */}
-            <h2 className='section_heading'>Top Courses in {catalogPageData?.selectedCategory.name}</h2>
+            <h2 className='section_heading'>Top Courses in Different Categories</h2>
 
             {/* ------------- Courses ------------------------- */}
+            <div>
             <CourseSlider courses={catalogPageData?.differentCategory?.courses} />
+            </div>
+          
           </section>
 
           {/* ----------------------------- Section 3 ------------------------------------ */}
@@ -130,7 +133,7 @@ const Catalog = () => {
               <div className='grid grid-cols-1 lg:grid-cols-2 border border-pink-400'>
 
                 {
-                  catalogPageData?.mostSellingCourses.slice(0,6).map((course , index) => (
+                  catalogPageData?.mostSellingCourses.slice(0, 6).map((course, index) => (
                     <CourseCard course={course} key={index} Height={"h-[400px]"} />
                   ))
 

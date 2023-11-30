@@ -5,19 +5,21 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import {GetavgRating} from '../../../utils/avgRating'
 
-const CourseCard = (course , Height) => {
+const CourseCard = ({course , Height}) => {
 
 const [avgReviewCount , setAvgReviewCount] = useState(0);
 
+// console.log("Course : ", course);
+
 useEffect(()=> {
-     const count = GetavgRating(course.ratingAndReviews);
+     const count = GetavgRating(course?.ratingAndReviews);
      setAvgReviewCount(count);
-}, [course])
+}, [course]);
 
 
 
   return (
-    <div>
+    <div className='border border-pink-400'>
       <Link to={`/courses/${course._id}`}>
         <div>
           {/* ---------------- course thumbnail ---------------------- */}
@@ -30,7 +32,7 @@ useEffect(()=> {
 
             {/* ---------- course title ----------- */}
             <h2>
-              {course?.courseName}
+              {course?.courseName} 
             </h2>
 
             {/* ---------- Instructor ------------------- */}

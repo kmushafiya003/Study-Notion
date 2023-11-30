@@ -104,7 +104,7 @@ const MyCourses = () => {
 
       {
         courses.length > 0 && (
-          <form className='border border-blue-200 flex px-8 justify-end items-center gap-x-3' onSubmit={handleSubmit(deleteSubmitHandler )}>
+          <form className=' flex px-8 justify-end items-center gap-x-3' onSubmit={handleSubmit(deleteSubmitHandler )}>
 
             {/* ----------------- checkbox ----------------- */}
 
