@@ -3,61 +3,68 @@ import { Link } from 'react-router-dom'
 import RatingStars from '../../common/RatingStars'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import {GetavgRating} from '../../../utils/avgRating'
+import { GetavgRating } from '../../../utils/avgRating'
 
-const CourseCard = ({course , Height}) => {
+const CourseCard = ({ course, Height, fullRounded }) => {
 
-const [avgReviewCount , setAvgReviewCount] = useState(0);
+  const [avgReviewCount, setAvgReviewCount] = useState(0);
 
-// console.log("Course : ", course);
+  // console.log("Course : ", course);
 
-useEffect(()=> {
-     const count = GetavgRating(course?.ratingAndReviews);
-     setAvgReviewCount(count);
-}, [course]);
+  useEffect(() => {
+    const count = GetavgRating(course?.ratingAndReviews);
+    setAvgReviewCount(count);
+  }, [course]);
 
 
 
   return (
-    <div className='border border-pink-400'>
+    <div className=' py-2 '>
       <Link to={`/courses/${course._id}`}>
-        <div>
+        <div className='flex flex-col gap-y-3 bg-richblack-800 rounded-b-xl pb-4'>
           {/* ---------------- course thumbnail ---------------------- */}
           <div>
-            <img src={course?.thumbnail} alt={course?.courseName} className={`${Height} w-full rounded-xl object-cover`}/>
+            <img src={course?.thumbnail} alt={course?.courseName} className={`${Height} w-full object-cover rounded-t-xl`} />
           </div>
 
           {/* ------------------ course Info ----------------------------- */}
-          <div>
+          <div className='flex flex-col gap-y-4 px-4 py-2'>
 
-            {/* ---------- course title ----------- */}
-            <h2>
-              {course?.courseName} 
-            </h2>
+            <div >
 
-            {/* ---------- Instructor ------------------- */}
+              {/* ---------- course title ----------- */}
+              <h2 className='text-[16px] sm:text-lg text-richblack-5'>
+                {course?.courseName}
+              </h2>
 
-            <p>
-             {course?.instructor?.firstName} {course?.instructor?.lastName}
-            </p>
-          </div>
+              {/* ---------- Instructor ------------------- */}
 
-           {/* ------------------- Ratings ------------------ */}
+              <p className='italic text-sm'>
+                {course?.instructor?.firstName} {course?.instructor?.lastName}
+              </p>
+            </div>
 
-           <div>
-              <p>{avgReviewCount || 0}</p>
+            {/* ------------------- Ratings ------------------ */}
+
+            <div className='flex gap-x-3 text-sm'>
+              <p className='text-richblack-5'>{avgReviewCount || 0}</p>
               <RatingStars Review_Count={avgReviewCount} />
-              <p>{course?.ratingAndReviews?.length} Ratings</p>
-           </div>
+              <p className='text-richblack-400'>{course?.ratingAndReviews?.length} Ratings</p>
+            </div>
 
-           {/* ----------------- course price ------------------ */}
+            {/* ----------------- course price ------------------ */}
 
-           <p>
-            {
-              course?.price
-            }
-           </p>
+            <p className='text-richblack-5 text-sm sm:text-lg'>
+              Rs. 
+              { 
+              " " +
+                course?.price
+              }
+            </p>
+
+          </div>
         </div>
+
       </Link>
     </div>
   )

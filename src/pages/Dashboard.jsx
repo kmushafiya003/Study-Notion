@@ -52,9 +52,9 @@ const Dashboard = () => {
             <Sidebar></Sidebar>
 
 
-            <div className='h-[calc(99vh-3.5rem)] sm:w-11/12  w-full  overflow-auto border'>
+            <div className='h-[calc(99vh-3.5rem)] sm:w-11/12  w-full  overflow-auto '>
 
-                <div className=' sm:py-12 py-6  mx-auto border-2 border-blue-200'>
+                <div className=' sm:py-12 py-6  mx-auto '>
                     <div className='flex sm:hidden items-center w-max mt-2 mb-8  text-white text-2xl cursor-pointer hover:text-yellow-100' onClick={() => setOpen(true)}>
      
                         <BsThreeDotsVertical></BsThreeDotsVertical>

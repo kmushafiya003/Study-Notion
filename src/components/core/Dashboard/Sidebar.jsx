@@ -31,7 +31,7 @@ const Sidebar = () => {
     return (
         <div className=' relative '>
 
-            <div className='hidden sm:flex  flex-col  smd:min-w-[230px] w-[200px]   h-[calc(99vh-3.5rem)] bg-richblack-800 py-8 border-2 border-pink-400'>
+            <div className='hidden sm:flex  flex-col  smd:min-w-[230px] w-[200px]   h-[calc(99vh-3.5rem)] bg-richblack-800 py-8 '>
 
                 {/* ----------------   SideBar Upper Links --------------------- */}
 

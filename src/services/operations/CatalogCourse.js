@@ -30,7 +30,7 @@ export const getCatalogPageData = async(categoryId) => {
 
      }catch(err){
         console.log("Category Page Detail Error : " , err);
-        // toast.error(err.message);
+        toast.error(err.message);
         result = err.response?.data?.data ;
 
      }

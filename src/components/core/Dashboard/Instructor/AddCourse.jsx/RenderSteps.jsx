@@ -25,7 +25,7 @@ const RenderSteps = () => {
     ]
 
     return (
-        <div className='flex flex-col border-2 border-yellow-400 gap-7'>
+        <div className='flex flex-col  gap-7'>
 
             {/* --------------- steps ------------------------ */}
             <div className='xs:block hidden'>

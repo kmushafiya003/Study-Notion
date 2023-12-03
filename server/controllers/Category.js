@@ -154,7 +154,8 @@ exports.getCategoryPageDetails = async (req, res) => {
                 path: "courses",
                 match: { status: "Published" },
                 populate: {
-                    path: "ratingAndReviews"
+                    path: "instructor"
+                 
                    
                 }
             })
