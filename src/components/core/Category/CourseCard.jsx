@@ -19,9 +19,9 @@ const CourseCard = ({ course, Height, fullRounded }) => {
 
 
   return (
-    <div className=' py-2 '>
+    <div className=' py-2'>
       <Link to={`/courses/${course._id}`}>
-        <div className='flex flex-col gap-y-3 bg-richblack-800 rounded-b-xl pb-4'>
+        <div className='flex flex-col gap-y-3 bg-richblack-800 rounded-xl pb-4'>
           {/* ---------------- course thumbnail ---------------------- */}
           <div>
             <img src={course?.thumbnail} alt={course?.courseName} className={`${Height} w-full object-cover rounded-t-xl`} />

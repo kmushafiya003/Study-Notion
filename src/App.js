@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import MyCourses from "./components/core/Dashboard/Instructor/MyCourses.jsx";
 import EditCourse from "./components/core/Dashboard/Instructor/EditCourse/index.js";
 import Catalog from "./pages/Catalog.jsx";
+import CourseDetails from "./pages/CourseDetails";
 
 
 //agr kuch hua to yaha error hai
@@ -48,6 +49,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/catalog/:catalogName"  element={<Catalog />} />
+        <Route path="/courses/:courseId" element={<CourseDetails />} />
 
 
         {/* ---------------   Auth Routes  ---------------------------- */}
