@@ -11,7 +11,7 @@ const {
 
 export const getCatalogPageData = async(categoryId) => {
 
-    const toatsId = toast.loading("Loading...");
+    const toastId = toast.loading("Loading...");
     let result = [];
 
 
@@ -35,6 +35,6 @@ export const getCatalogPageData = async(categoryId) => {
 
      }
 
-     toast.dismiss(toatsId);
+     toast.dismiss(toastId);
      return result;
 }

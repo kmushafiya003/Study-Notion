@@ -4,6 +4,8 @@ const Course = require('../models/Course');
 const User = require('../models/User');
 const mailSender = require('../utils/mailSender');
 const { courseEnrollmentEmail } = require('../mail/templates/courseEnrollmentEmail');
+const { paymentSuccessEmail} = require('../mail/templates/paymentSuccessfullEmail')
+const crypto = require("crypto");
 
 
 
@@ -17,6 +19,7 @@ exports.capturePayment = async(req ,res) => {
     const userId = req.user.id;
 
     //validation on courses
+
 
     if(courses.length === 0) {
         console.log("No courses selected for buy");
@@ -32,15 +35,19 @@ exports.capturePayment = async(req ,res) => {
 
     //loop for traversing to all courses for totalAmount
 
+
+
     for(const course_id of courses){
 
         let course;
 
         try{
 
+
         course = await Course.findById(course_id);
 
         //validation on course
+
 
         if(!course){
             console.log("Course Not found with this ID : " , course_id);
@@ -50,6 +57,8 @@ exports.capturePayment = async(req ,res) => {
                 message : "Could not find the course",
             })
         }
+
+      
 
         const uid = new mongoose.Types.ObjectId(userId);
 
@@ -61,6 +70,8 @@ exports.capturePayment = async(req ,res) => {
             })
 
         }
+
+
 
         totalAmout += course.price ;
 
@@ -89,11 +100,12 @@ exports.capturePayment = async(req ,res) => {
 
     try{
         const paymentResponse = await instance.orders.create(options);
-        console.log("Payment response : " , paymentResponse);
+        // console.log("Payment response : " , paymentResponse);
 
         res.status(200).json({
             success : true,
-            message : paymentResponse,
+            data: paymentResponse,
+            message:"Initiate the order successfully"
         })
 
     }catch(err){
@@ -114,6 +126,8 @@ exports.capturePayment = async(req ,res) => {
 //verify  the payment
 
 exports.verifyPayment = async(req , res) => {
+
+    
 
     const razorpay_order_id = req.body?.razorpay_order_id;
     const razorpay_payment_id = req.body?.razorpay_payment_id;
@@ -175,6 +189,8 @@ exports.verifyPayment = async(req , res) => {
 //enroll the student to the given course
 
 const enrollStudents = async(courses , userId , res)=> {
+
+    console.log("1")
      
    if(!courses || !userId){
     console.log("Please provide require data");
@@ -184,19 +200,27 @@ const enrollStudents = async(courses , userId , res)=> {
     })
    }
 
+   console.log("2")
+
    //Traversing to all courses for enrolling
 
    for(const courseId of courses){
+   console.log("3")
+
 
      try{
 
             //find the course and enrolled the student in it
+
+
 
     const enrolledCourse = await Course.findByOneAndUpdate(
         {_id : courseId} ,
         {$push : { studentsEnrolled : userId}},
         { new : true },
     )
+
+    console.log("4+5")
 
     if(!enrolledCourse){
         console.log("Enrolled Course not found");
@@ -252,6 +276,74 @@ const enrollStudents = async(courses , userId , res)=> {
 
    }
 }
+
+
+//send successfull payment email
+
+exports.sendPaymentSuccessEmail = async(req , res) => {
+
+    const {orderId , paymentId , amount} = req.body;
+    // const {orderId, paymentId, amount} = req.body;
+
+    console.log("Suuccessfull email mei");
+    // console.log("Order_id : " , orderId);
+    // console.log("payment_id : " , paymentId );
+
+    const userId = req.user.id;
+    if(!orderId , !paymentId , !amount , !userId){
+
+        console.log("All fields are required");
+        return res.status(401).json({
+            success : false,
+            message : "Please Provide all the fields"
+        })
+    }
+
+    try{
+
+        //find the enroll student
+
+        const enrollStudent = await User.findById(userId);
+
+        await mailSender(
+            enrollStudent.email ,
+            "Payment Received",
+            paymentSuccessEmail(`${enrollStudent.firstName}` , amount/100 , orderId , paymentId)
+
+        )
+
+
+
+    }catch(err){
+
+        console.log("Error while sending payment successfull api");
+        return res.status(500).json({
+            success : false,
+            message : " Could not send the successfull payment email",
+            error : err.message,
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ------------------------------ Single courses ----------------------------------------------
