@@ -169,7 +169,7 @@ export function logout(navigate) {
  
 
   return async (dispatch) => {
-    console.log("Logout function mei aa gyi")
+    
     dispatch(setToken(null));
     dispatch(setUser(null));
     dispatch(resetCart());

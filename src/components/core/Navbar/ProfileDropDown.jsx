@@ -61,7 +61,7 @@ const ProfileDropDown = () => {
   
 
             <div onClick={() => {
-              console.log("ONclick hua hai");
+              
               dispatch(logout(navigate));
               setOpen(false);
               

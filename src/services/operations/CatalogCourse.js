@@ -19,7 +19,7 @@ export const getCatalogPageData = async(categoryId) => {
 
         const response = await apiConnector("POST" , CATEGORY_PAGE_DETAILS , {categoryId : categoryId});
 
-        console.log("Category Page Detail API : " , response);
+      //   console.log("Category Page Detail API : " , response);
 
         if(!response?.data?.success){
            console.log("Throw wali field mei error ");

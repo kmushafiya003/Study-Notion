@@ -183,6 +183,64 @@ exports.verifyPayment = async(req , res) => {
 
 
 }
+exports.verifyPayment = async(req , res) => {
+
+    
+
+    const razorpay_order_id = req.body?.razorpay_order_id;
+    const razorpay_payment_id = req.body?.razorpay_payment_id;
+    const  razorpay_signature = req.body?.razorpay_signature;
+
+    const courses = req.body?.courses;
+
+    const userId = req.user.id;
+
+    //validation
+
+    if(!razorpay_order_id ||
+       !razorpay_payment_id ||
+       !razorpay_signature ||
+       !courses ||
+       !userId ){
+        console.log("Payment Failed");
+        return res.status(402).json({
+            success : false,
+            message : "Payment Failed"
+        })
+       }
+
+    let body = razorpay_order_id + "|" + razorpay_payment_id ;
+
+         
+    const expectedSignature = crypto
+          .createHmac("sha256" , process.env.RAZORPAY_SECRET)
+          .update(body.toString())
+          .digest("hex");
+
+    
+    if(expectedSignature === razorpay_signature){
+
+        //if equal hai to enroll karao students ko
+
+     await enrollStudents(courses, userId , res);
+
+        //return response
+        return res.status(200).json({
+            success : true,
+            message : "Payment Verified",
+        })
+    }
+
+    return res.status(400).json({
+
+        success : false,
+        message : "Payment Failed"
+
+    })
+   
+
+
+}
 
 
 
@@ -190,7 +248,7 @@ exports.verifyPayment = async(req , res) => {
 
 const enrollStudents = async(courses , userId , res)=> {
 
-    console.log("1")
+
      
    if(!courses || !userId){
     console.log("Please provide require data");
@@ -200,27 +258,30 @@ const enrollStudents = async(courses , userId , res)=> {
     })
    }
 
-   console.log("2")
+   
 
    //Traversing to all courses for enrolling
 
    for(const courseId of courses){
-   console.log("3")
+ 
 
 
      try{
 
             //find the course and enrolled the student in it
 
+            
 
 
-    const enrolledCourse = await Course.findByOneAndUpdate(
+    const enrolledCourse = await Course.findOneAndUpdate(
         {_id : courseId} ,
         {$push : { studentsEnrolled : userId}},
         { new : true },
     )
 
-    console.log("4+5")
+    
+
+ 
 
     if(!enrolledCourse){
         console.log("Enrolled Course not found");
@@ -232,7 +293,7 @@ const enrollStudents = async(courses , userId , res)=> {
 
     //find the student and add the course to their course list
 
-    const enrolledStudent = await User.findByIdAndDelete(userId , {
+    const enrolledStudent = await User.findByIdAndUpdate(userId , {
         $push : {
             courses : courseId
         }},

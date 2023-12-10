@@ -114,7 +114,7 @@ exports.getCategoryPageDetails = async (req, res) => {
             })
         }
 
-        console.log("Selected Category : ", selectedCategory);
+        // console.log("Selected Category : ", selectedCategory);
 
 
 
@@ -141,7 +141,7 @@ exports.getCategoryPageDetails = async (req, res) => {
             })
             .exec()
 
-        console.log("Different Category : ", differentCategory);
+        // console.log("Different Category : ", differentCategory);
 
 
         //for mostSellingCourse ------------> data(3) 
@@ -176,7 +176,7 @@ exports.getCategoryPageDetails = async (req, res) => {
 
 
 
-        console.log("Most Selling Courses : ", mostSellingCourses)
+        // console.log("Most Selling Courses : ", mostSellingCourses)
 
         //return response
 

@@ -43,7 +43,7 @@ const Catalog = () => {
       try {
 
         const result = await getCatalogPageData(categoryId);
-        console.log("Printing result : ", result);
+        // console.log("Printing result : ", result);
         setCatalogPageData(result);
 
 

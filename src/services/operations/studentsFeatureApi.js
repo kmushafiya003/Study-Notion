@@ -67,7 +67,35 @@ export async function buyCourse( token, courses , userDetails , navigate , dispa
         }
 
 
-        console.log("Order Response : " , orderResponse);
+        // console.log("Order Response : " , orderResponse);
+
+        //order response
+
+        // amount: 499900
+        // ​​​
+        // amount_due: 499900
+        // ​​​
+        // amount_paid: 0
+        // ​​​
+        // attempts: 0
+        // ​​​
+        // created_at: 1702216060
+        // ​​​
+        // currency: "INR"
+        // ​​​
+        // entity: "order"
+        // ​​​
+        // id: "order_NAfFXei4Ukvbum"
+        // ​​​
+        // notes: Array []
+        // ​​​
+        // offer_id: null
+        // ​​​
+        // receipt: "0.23896684270168644"
+        // ​​​
+        // status: "created"
+
+
 
         //options 
         const RAZORPAY_KEY = "rzp_test_mJSAEPGocIbFxJ"
@@ -84,6 +112,7 @@ export async function buyCourse( token, courses , userDetails , navigate , dispa
                 name : `${userDetails.firstName}` + " " + `${userDetails.lastName}`,
                 email : `${userDetails.email}`
             },
+            
             handler :function(response) {
                 
                 //send successfull  mail
@@ -128,8 +157,9 @@ export async function buyCourse( token, courses , userDetails , navigate , dispa
 
 async function sendPaymentSuccessfullEmail(response , amount , token){
 
-    console.log("Response which is passed as parameter in option handler : " , response);
-    console.log("Order Id in services : " , response.razorpay_order_id);
+    //response send the razorpay order id , razorpay payment id and signature
+    // console.log("Response which is passed as parameter in option handler : " , response);
+   
 
     try{
 
@@ -159,17 +189,22 @@ async function verifyPayment(bodyData , token , navigate , dispatch){
     dispatch(setPaymentLoading(true));
 
     try{
+
+        
         const response = await apiConnector("POST" , COURSE_VERIFY_API , bodyData , {
-            Authorization : `Bearer ${token}`
+            Authorization :`Bearer ${token}`
         })
+
+
 
         if(!response.data.success){
             console.log("Throw wali filed mei error of verify Payment");
             throw new Error (response.data.message);
         }
 
+
         toast.success("Payment Successfull , You are added to the course");
-        navigate("/dashboard/eenrolled-courses");
+        navigate("/dashboard/enrolled-courses");
 
         dispatch(resetCart());
 
@@ -186,3 +221,8 @@ async function verifyPayment(bodyData , token , navigate , dispatch){
 
 
 }
+
+
+
+
+
