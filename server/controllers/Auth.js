@@ -283,7 +283,7 @@ exports.login = async (req, res) => {
         //Generate JWT token , after matching password
 
         const payload = {
-            id: user.id,
+            id: user._id,
             email: user.email,
             accountType: user.accountType,
         }
@@ -291,7 +291,7 @@ exports.login = async (req, res) => {
         if (await bcrypt.compare(password, user.password)) {
 
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
-                expiresIn: "24h"
+                expiresIn: "36h"
             });
 
             //agr isme error aayega to yahi aayega

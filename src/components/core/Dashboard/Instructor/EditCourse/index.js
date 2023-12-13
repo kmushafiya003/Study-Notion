@@ -40,7 +40,7 @@ const EditCourse = () => {
       }
 
       setLoading(false);
-      console.log("Course : " , course);
+      
     }
 
     populateCourseDetails()

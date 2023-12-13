@@ -26,7 +26,7 @@ const cartSlice = createSlice({
         const course = value.payload ;
 
         //find index for the given course is already present in the cart or not
-        const index = state.cart.findIndex((item)=> item.id === course.id);
+        const index = state.cart.findIndex((item)=> item._id === course._id);
 
         //if yes
         if(index >= 0 ){
@@ -59,7 +59,7 @@ const cartSlice = createSlice({
         const courseID = value.payload ;
 
         //find index for the given course is already present in the cart or not
-        const index = state.cart.findIndex((item)=> item.id === courseID);
+        const index = state.cart.findIndex((item)=> item._id === courseID);
 
         if(index >= 0){
 

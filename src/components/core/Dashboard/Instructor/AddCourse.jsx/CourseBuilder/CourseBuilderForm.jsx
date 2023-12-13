@@ -39,9 +39,9 @@ const CourseBuilderForm = () => {
 
   const { token } = useSelector((state) => state.auth);
 
-  useEffect(()=> {
-    console.log("Course : " , course);
-  }, [])
+  // useEffect(()=> {
+  //   console.log("Course : " , course);
+  // }, [])
 
 
 

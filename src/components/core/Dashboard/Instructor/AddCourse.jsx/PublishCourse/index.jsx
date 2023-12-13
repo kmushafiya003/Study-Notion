@@ -27,7 +27,7 @@ const PublishCourse = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log("Course : ", course);
+        // console.log("Course : ", course);
 
         if (course?.status === COURSE_STATUS.PUBLISHED) {
             setValue("public", true);

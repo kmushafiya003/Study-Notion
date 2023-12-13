@@ -175,9 +175,9 @@ const SubSectionModal = ({
 
   }
 
-  useEffect(()=> {
-    console.log("Course : " , course);
-  }, [])
+  // useEffect(()=> {
+  //   console.log("Course : " , course);
+  // }, [])
 
 
   return (

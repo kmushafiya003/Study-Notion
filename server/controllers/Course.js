@@ -79,11 +79,11 @@ exports.createCourse = async (req, res) => {
             instructor: instructorDetails._id,
             whatYouWillLearn,
             price,
-            tag ,
+            tag : JSON.parse(tag),
             category: categoryDetails._id,
             thumbnail: thumbnailImage.secure_url,
             status: status,
-            instructions,
+            instructions: JSON.parse(instructions),
         });
 
         //Add the new course to the user schema of Instructor

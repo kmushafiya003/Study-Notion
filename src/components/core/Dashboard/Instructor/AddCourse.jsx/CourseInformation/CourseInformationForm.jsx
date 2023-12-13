@@ -87,7 +87,7 @@ const CourseInformationForm = () => {
     const isFormUpdated = () => {
 
         const currentValues = getValues();
-        console.log("CurrentValues : ", currentValues);
+        // console.log("CurrentValues : ", currentValues);
 
         if (currentValues.courseTitle !== course.courseName ||
             currentValues.courseShortDescription !== course.courseDescription ||
@@ -169,7 +169,7 @@ const CourseInformationForm = () => {
                     formData.append("thumbnailImage", data.courseImage);
                 }
 
-                console.log("Course FormData : ", formData);
+                // console.log("Course FormData : ", formData);
 
 
                 //now call the editCourse api from backend
@@ -222,7 +222,7 @@ const CourseInformationForm = () => {
             formData.append("status", COURSE_STATUS.DRAFT);
 
 
-            console.log("Course FormData : ", formData);
+            // console.log("Course FormData : ", formData);
 
 
             //now call the  addCourse/createCourse  api from backend
@@ -447,8 +447,8 @@ const CourseInformationForm = () => {
 
                     <RequirementField
                         name="courseRequirements"
-                        label="Requirements / Instructions"
-                        placeholder="Add requirements / instructions"
+                        label="Course Includes"
+                        placeholder="Add Course Includes"
                         register={register}
                         errors={errors}
                         setValue={setValue}

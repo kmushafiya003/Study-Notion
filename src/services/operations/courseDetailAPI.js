@@ -74,7 +74,7 @@ export const fetchCourseDetails = async (courseId) => {
             throw new Error(response.data.message);
         }
 
-        result = response?.data?.data;
+        result = response.data;
 
 
     } catch (err) {

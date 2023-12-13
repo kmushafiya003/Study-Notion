@@ -21,7 +21,7 @@ const ChipInput = (
   
   useEffect(() => {
     if (editCourse) {
-      console.log("Course is : ", course);
+      // console.log("Course is : ", course);
       setChips(course?.tag);
     }
 
