@@ -14,6 +14,7 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
     const { token } = useSelector((state) => state.auth);
 
     const myRef = useRef(null)
+   
 
 
     const [openCatalogue, setOpenCatalogue] = useState(false)
@@ -25,7 +26,11 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
 
 
 
-    useOnClickOutside(myRef, () => setMenu(false));
+    // useOnClickOutside(myRef, () =>{
+    //     setMenu(false)
+    //     setOpenCatalogue(false);
+    // } );
+
 
 
 
@@ -123,12 +128,17 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
                             subLinks.length ? (
 
                                 subLinks.map((subLink, index) => {
+
                                     return (
-                                        <Link to={"/"} key={index} className='rounded-lg bg-transparent py-1 pl-2 pr-10 hover:bg-blue-200 hover:text-richblack-900 hover:shadow-md hover:shadow-richblack-700 transition-all duration-300'>
-                                            {subLink.name}
-                                        </Link>
+                                      <Link to={`/catalog/${subLink.name
+                                        .split(" ")
+                                        .join("-")
+                                        .toLowerCase()}`}
+                                         key={index} className='rounded-lg bg-transparent py-3 pl-4 hover:bg-richblack-50'>
+                                        {subLink.name}
+                                      </Link>
                                     )
-                                })
+                                  })
 
                             ) :
                                 (<div></div>)

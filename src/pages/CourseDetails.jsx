@@ -167,24 +167,32 @@ const CourseDetails = () => {
 
     <div className='mt-14 flex flex-col tracking-wide '>
 
-      {/* --------------------  upper part  ------------------------- */}
+      {/* --------------------  upper part ------------------------- */}
 
       <div className=' bg-richblack-800 py-14 border border-yellow-200 '>
 
-        <div className='w-11/12 mx-auto flex gap-x-6 border px-8 relative'>
+        {/* ------------------- For large Screen ------------------------------- */}
+
+        <div className='hidden md:flex  w-11/12 mx-auto gap-x-6 border xl:px-8 lg:px-4 px-0  relative'>
 
           {/* ------------------------ left side  ----------------------------- */}
 
-          <div className='w-[65%] border border-pink-300 flex flex-col gap-y-4'>
+          <div className='xl:w-[65%] lg:w-[62%] mmd:w-[58%] smd:w-[55%] w-[52%] border border-pink-300 flex flex-col gap-y-4'>
 
-            <h1 className='text-richblack-5 text-3xl font-medium'>{courseName}</h1>
+            {/* ------------------- Course Name ---------------------- */}
+
+            <h1 className='text-richblack-5 lg:text-3xl text-2xl font-medium'>{courseName}</h1>
+
+            {/* --------------------- Course Description ---------------------- */}
 
             <h2 className='text-sm text-richblack-200 font-normal'>{courseDescription}</h2>
 
-            <div className='flex gap-x-3'>
+            {/* --------------------- Rating and reviews -------------------------- */}
+
+            <div className='flex xmd:flex-row flex-col xmd:gap-x-3 gap-y-3'>
 
               <div className='flex gap-x-2'>
-                <span className='text-yellow-100 text-lg'>{avgReviewCount}</span>
+                <span className='text-yellow-100 xmd:text-lg text-[16px]'>{avgReviewCount}</span>
                 <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
                 <span className='text-richblack-25 text-[16px]'>{`(${ratingAndReviews.length} reviews)`}</span>
               </div>
@@ -193,15 +201,20 @@ const CourseDetails = () => {
 
             </div>
 
-            <p className='text-richblack-25 text-[16px]'>{`Created by ${instructor.firstName}  ${instructor.lastName}`}</p>
 
-            <div className='flex gap-x-4'>
+            {/* ------------------------- Instructor --------------------------- */}
 
-              <p className='text-richblack-25 text-[16px]'>
+            <p className='text-richblack-25 text-[16px] italic'>{`Created by ${instructor.firstName}  ${instructor.lastName}`}</p>
+
+            {/* ------------- Time and Language ---------------------------- */}
+
+            <div className='flex xmd:flex-row flex-col  xmd:gap-x-4 gap-y-3'>
+
+              <p className='text-richblack-25 xmd:text-[16px] text-sm'>
                 Created at {formatDate(createdAt)}
               </p>
 
-              <p className='flex items-center gap-x-2 text-richblack-25 text-[16px]'>
+              <p className='flex items-center gap-x-2 text-richblack-25 xmd:text-[16px] text-sm'>
                 <MdLanguage className='text-lg' />
                 English
               </p>
@@ -213,7 +226,7 @@ const CourseDetails = () => {
 
           {/* -----------------------------  right side  ------------------------------------ */}
 
-          <div className='border border-yellow-200 bg-richblack-600 min-w-[420px]  w-[25%] absolute right-1'>
+          <div className=' bg-richblack-600 xl:min-w-[400px] xlg:w-[360px] lg:w-[320px] border border-yellow-200  absolute right-1 rounded-md'>
 
             <CourseDetailCard course={response?.data?.courseDetails} setModalData={setModalData} handleBuyCourse={handleBuyCourse} modalData={modalData} />
 
@@ -223,14 +236,29 @@ const CourseDetails = () => {
 
         </div>
 
+
+        {/* ------------------- For Small Screen ----------------------------------- */}
+        <div className='flex md:hidden flex-col  w-11/12 mx-auto gap-x-6 border sm:px-8  px-6'>
+
+          {/* ------------------- Thumbnail  ---------------- */}
+
+          <div className='flex items-center justify-center'>
+
+            <img src={thumbnail} alt={courseName} className='max-h-[300px] min-h-[180px] sm:min-w-[500px] object-cover rounded-lg' />
+
+          </div>
+
+         
+        </div>
+
       </div>
 
 
       {/* -------------------- lower part --------------------------------- */}
 
-      <div className=' bg-richblack-900 py-4'>
+      <div className=' bg-richblack-900 py-4 border border-pink-300'>
 
-        <div className='w-11/12 mx-auto  bg-richblack-900 px-8 flex flex-col gap-y-8'>
+        <div className='w-11/12 mx-auto  bg-richblack-900 xl:px-8 lg:px-4 px-0 flex flex-col gap-y-8'>
 
 
           {/* -------------- What you will learn section ------------------ */}
@@ -297,7 +325,7 @@ const CourseDetails = () => {
 
           {/* ------------------------- Author  ------------------------------------ */}
 
-          <div className=' flex flex-col gap-y-3'>
+          <div className='mb-6  flex flex-col gap-y-3'>
             <h2 className='text-2xl font-semibold text-richblack-5'>Author</h2>
 
             <div className='flex flex-col gap-y-2'>

@@ -121,8 +121,6 @@ const Navbar = () => {
 
                                 subLinks.map((subLink, index) => {
 
-
-                                  //Have to mention the path of catalog
                                   return (
                                     <Link to={`/catalog/${subLink.name
                                       .split(" ")
