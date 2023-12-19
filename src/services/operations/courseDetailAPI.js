@@ -78,9 +78,10 @@ export const fetchCourseDetails = async (courseId) => {
 
 
     } catch (err) {
-        console.log("Error in services of Course Details");
-        console.log(err.message);
-        toast.error(err.message);
+        // console.log("Error in services of Course Details");
+        console.log("COURSE_DETAILS_API API ERROR............", err)
+        // result = err.response.data
+        // toast.error(err.response.data.message);
     }
 
     toast.dismiss(toastId);

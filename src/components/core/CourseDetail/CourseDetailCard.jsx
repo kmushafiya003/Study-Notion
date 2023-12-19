@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast'
@@ -7,6 +7,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import { FaShareFromSquare } from "react-icons/fa6";
 import copy from 'copy-to-clipboard';
 import { ACCOUNT_TYPE } from '../../../utils/constants'
+import { useEffect } from 'react';
 
 
 
@@ -17,10 +18,12 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
   const { user } = useSelector((state) => state.profile);
   const { token } = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
   const {
+    _id,
     courseName,
     thumbnail,
     price,
@@ -31,6 +34,20 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
 
 
+  const [cartCourse , setCartCourse] = useState([]);
+
+
+  useEffect(()=>{
+
+    if(cart){
+      const Courses = cart?.map((course) => course._id);
+       setCartCourse(Courses);
+     
+      }
+
+  } , [cart])
+
+ 
 
 
   const handleAddToCart = () => {
@@ -57,6 +74,21 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
   }
 
+  const handleGoToCart = () => {
+
+    if (user && user.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+      toast.error("You are an Instructor , you can't buy a course");
+      return;
+    }
+
+    if(token){
+       navigate("/dashboard/cart");
+    }
+
+    return;
+
+  }
+
   const handleShare = () => {
 
     copy(window.location.href);
@@ -65,11 +97,12 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
   }
 
+ 
 
   return (
-    <div className='bg-richblack-700 w-full h-full px-6 py-3 rounded-md flex gap-y-6 flex-col'>
+    <div className='bg-richblack-700 w-full h-full px-6 py-2 rounded-md flex gap-y-4 flex-col'>
 
-      <img src={thumbnail} alt={courseName} className='rounded-xl max-h-[300px] min-h-[180px] w-[400px] object-cover' />
+      <img src={thumbnail} alt={courseName} className='rounded-xl max-h-[280px] min-h-[180px] w-[400px] object-cover' />
 
       <div className='text-3xl font-bold'>
         Rs. {price}
@@ -77,12 +110,12 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
       {/* -------------------- button group --------------------------- */}
 
-      <div className='flex flex-col gap-y-4 '>
+      <div className='flex flex-col gap-y-3 '>
 
         {/* ------------------- Buy Course or Go to Course ---------------------------- */}
 
         <button
-          className='bg-yellow-50 py-3 px-6 text-richblack-900 font-semibold rounded-lg'
+          className='bg-yellow-50 py-2 px-6 text-richblack-900 font-semibold rounded-lg hover:scale-95 transition-all duration-300'
           onClick={
             user && course?.studentsEnrolled?.includes(user?._id) ?
               () => navigate("/dashboard/enrolled-courses") :
@@ -98,10 +131,17 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
         {
           !course?.studentsEnrolled?.includes(user?._id) && (
-            <button className='bg-richblack-900 text-richblack-5 py-3 px-6  font-semibold rounded-lg'
-              onClick={handleAddToCart}
+            <button className='bg-richblack-900 text-richblack-5 py-2 px-6  font-semibold rounded-lg hover:scale-95 transition-all duration-300'
+              onClick={
+                cartCourse?.includes(_id) ? 
+                ()=> handleGoToCart() :
+                () => handleAddToCart()
+              }
             >
-              Add To Cart
+           {
+            cartCourse?.includes(_id) ? "Go To Cart" : "Add To Cart"
+           }
+              
             </button>
           )
         }
@@ -120,7 +160,7 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
       {/* --------------- Course Includes --------------------------- */}
 
-      <div className='flex flex-col gap-y-3'>
+      <div className='flex flex-col gap-y-2'>
         <h2 className='text-[16px] font-medium'>This course includes:</h2>
 
         <div className='flex flex-col gap-y-3'>
@@ -142,7 +182,7 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
       {/* -------------------  Share Button  ------------------------- */}
 
       <div className='flex justify-center'>
-        <button className='flex items-center gap-x-1  text-yellow-100 py-3 px-3' onClick={handleShare}>
+        <button className='flex items-center gap-x-1  text-yellow-100 py-1 px-3' onClick={handleShare}>
           <FaShareFromSquare />
           <p>
             Share

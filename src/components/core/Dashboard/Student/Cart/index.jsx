@@ -15,6 +15,7 @@ const Cart = () => {
 
 
       {
+        
         totalItems > 0 ? (
           <div className='flex'>
             <CartCourses></CartCourses>

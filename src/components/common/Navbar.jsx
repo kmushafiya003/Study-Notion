@@ -164,7 +164,7 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        {/* ------------------ Login / Signup  / Dashboard  ------------------- */}
+        {/* ------------------ Login / Signup  / Dashboard / Cart  ------------------- */}
         <div className='flex xs:gap-x-5 md:gap-x-3 lg:gap-x-5 gap-x-2  items-center '>
 
           {
@@ -173,7 +173,7 @@ const Navbar = () => {
               <Link to={"/dashboard/cart"} className='relative'>
                 {
                   totalItems > 0 && (
-                    <span className='w-3 h-3 p-2 rounded-full flex justify-center items-center text-[12px] bg-richblack-5 text-richblack-900 absolute left-[60%] top-[-30%] font-semibold'>14</span>
+                    <span className='w-3 h-3 p-[10px] rounded-full flex justify-center items-center text-[12px] text-richblack-5 bg-richblack-500 absolute left-[60%] top-[-35%] font-semibold'>{totalItems}</span>
                   )
                 }
                 <AiOutlineShoppingCart className='text-[22px] ' />

@@ -1,4 +1,4 @@
- import React from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import IconButton from '../../common/IconButton';
@@ -92,52 +92,52 @@ const MyProfile = () => {
         </div>
 
         <div className='w-full sm:w-[95%] md:w-11/12 xmd:w-10/12  lg:w-9/12 flex xs:flex-col flex-row flex-wrap xs:flex-nowrap  xs:gap-4 gap-x-20 '>
-              {/* first */}
-              <div className='flex xs:flex-row flex-col xs:justify-between xs:items-center xsm:gap-x-20 '>
+          {/* first */}
+          <div className='flex xs:flex-row flex-col xs:justify-between xs:items-center xsm:gap-x-20 '>
 
-                {/* left */}
-                <div className=' mb-4 xs:mb-0  '>
-                  <p className=' text-richblack-500 text-sm my-1 '>First Name</p>
-                  <p className='text-richblack-25 text-[15px] font-semibold'>{user?.firstName}</p>
-                </div>
+            {/* left */}
+            <div className=' mb-4 xs:mb-0  '>
+              <p className=' text-richblack-500 text-sm my-1 '>First Name</p>
+              <p className='text-richblack-25 text-[15px] font-semibold'>{user?.firstName}</p>
+            </div>
 
-                {/* right */}
-                <div className=' xs:w-4/12 mb-4 xs:mb-0'>
-                  <p className='text-sm text-richblack-500 my-1 '>Last Name</p>
-                  <p className='text-richblack-25 text-[15px] font-semibold'>{user?.lastName}</p>
-                </div>
-              </div>
+            {/* right */}
+            <div className=' xs:w-4/12 mb-4 xs:mb-0'>
+              <p className='text-sm text-richblack-500 my-1 '>Last Name</p>
+              <p className='text-richblack-25 text-[15px] font-semibold'>{user?.lastName}</p>
+            </div>
+          </div>
 
-              {/* sec */}
-              <div className='flex xs:flex-row flex-col xs:justify-between xs:items-center  gap-x-10  ' >
-                {/* left */}
-                <div className='mb-4 xs:mb-0'>
-                  <p className='text-sm text-richblack-500 my-1'>Email</p>
-                  <p className='text-richblack-25 text-[15px] font-semibold'>{user?.email}</p>
-                </div>
+          {/* sec */}
+          <div className='flex xs:flex-row flex-col xs:justify-between xs:items-center  gap-x-10  ' >
+            {/* left */}
+            <div className='mb-4 xs:mb-0'>
+              <p className='text-sm text-richblack-500 my-1'>Email</p>
+              <p className='text-richblack-25 text-[15px] font-semibold'>{user?.email}</p>
+            </div>
 
-                {/* right */}
-                <div className=' xs:w-4/12 mb-4 xs:mb-0'>
-                  <p className='text-sm text-richblack-500 my-1'>Phone Number</p>
-                  <p className='text-richblack-25 text-[15px] font-semibold'>{user?.additionalDetails?.contactNumber ?? "Add Contact Number"}</p>
-                </div>
-              </div>
+            {/* right */}
+            <div className=' xs:w-4/12 mb-4 xs:mb-0'>
+              <p className='text-sm text-richblack-500 my-1'>Phone Number</p>
+              <p className='text-richblack-25 text-[15px] font-semibold'>{user?.additionalDetails?.contactNumber ?? "Add Contact Number"}</p>
+            </div>
+          </div>
 
-              {/* third */}
-              <div className='flex xsm:flex-row flex-col xsm:justify-between xs:items-center xs:gap-x-20 gap-x-24 '>
-                {/* left */}
-                <div className='mb-4 xsm:mb-0'>
-                  <p className='text-sm text-richblack-500 my-1 '>Gender</p>
-                  <p className='text-richblack-25 text-[15px] font-semibold'>{user?.additionalDetails?.gender ?? "Add Gender"}</p>
-                </div>
+          {/* third */}
+          <div className='flex xsm:flex-row flex-col xsm:justify-between xs:items-center xs:gap-x-20 gap-x-24 '>
+            {/* left */}
+            <div className='mb-4 xsm:mb-0'>
+              <p className='text-sm text-richblack-500 my-1 '>Gender</p>
+              <p className='text-richblack-25 text-[15px] font-semibold'>{user?.additionalDetails?.gender ?? "Add Gender"}</p>
+            </div>
 
-                {/* rigth */}
-                <div className=' xs:w-4/12'>
-                  <p className='text-sm text-richblack-500 my-1'>Date of Birth</p>
-                  <p className='text-richblack-25 text-[15px] font-semibold'>{user?.additionalDetails?.dateOfBirth ?? <p>Add Your Birthday</p>}</p>
-                </div>
+            {/* rigth */}
+            <div className=' xs:w-4/12'>
+              <p className='text-sm text-richblack-500 my-1'>Date of Birth</p>
+              <p className='text-richblack-25 text-[15px] font-semibold'>{user?.additionalDetails?.dateOfBirth ?? "Add Your Birthday"}</p>
+            </div>
 
-              </div>
+          </div>
 
         </div>
 

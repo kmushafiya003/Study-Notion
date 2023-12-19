@@ -138,13 +138,15 @@ export async function buyCourse( token, courses , userDetails , navigate , dispa
             console.log(response.error);
         })
 
+
+        
        
 
 
     }catch(err){
 
         console.log("Payment Api Error : " , err);
-        toast.error("Could not make Payment");
+        toast.error("Could not make payment");
         
     }
 

@@ -8,11 +8,11 @@ import Spinner from '../components/common/Spinner'
 import Error from './Error';
 import ConfirmModal from '../components/common/ConfirmModal';
 import RatingStars from '../components/common/RatingStars'
-import { toast } from 'react-hot-toast'
 import { MdLanguage } from "react-icons/md";
 import { formatDate } from '../services/formatDate'
 import CourseDetailCard from '../components/core/CourseDetail/CourseDetailCard';
-
+import Footer from '../components/common/Footer'
+import CourseAccordianBar from '../components/core/CourseDetail/CourseAccordianBar';
 
 const CourseDetails = () => {
 
@@ -27,6 +27,7 @@ const CourseDetails = () => {
   const [modalData, setModalData] = useState(null);
   const [totalNoOfLectures, setTotalNoOfLectures] = useState(0);
   const [avgReviewCount, setAvgReviewCount] = useState(0);
+  const [isActive, setIsActive] = useState([])
 
 
   //fetch courseDetail
@@ -60,7 +61,7 @@ const CourseDetails = () => {
 
   useEffect(() => {
 
-    const count = GetavgRating(response?.data[0]?.ratingAndReviews)
+    const count = GetavgRating(response?.data?.courseDetails?.ratingAndReviews)
 
     setAvgReviewCount(count);
 
@@ -75,7 +76,7 @@ const CourseDetails = () => {
 
     let lectures = 0;
 
-    response?.data[0]?.courseContent?.forEach((sec) => {
+    response?.data?.courseDetails?.courseContent?.forEach((sec) => {
       lectures += sec.subSection.length || 0;
     })
 
@@ -98,6 +99,9 @@ const CourseDetails = () => {
 
     )
   }
+
+
+  //Error page for success false
 
   if (!response.success) {
     return (
@@ -129,6 +133,17 @@ const CourseDetails = () => {
 
   }
 
+  //handle for collapsong sections
+
+  const handleActive = (id) => {
+    console.log("Inside handleActive function")
+    setIsActive(
+      !isActive.includes(id) ?
+        isActive.concat(id) :
+        isActive.filter((e) => e != id)
+    )
+  }
+
   const {
     _id: course_id,
     courseName,
@@ -143,18 +158,18 @@ const CourseDetails = () => {
     tag,
     createdAt,
 
-  } = response?.data[0];
+  } = response?.data?.courseDetails;
 
 
 
 
   return (
 
-    <div className='mt-14 flex flex-col tracking-wide'>
+    <div className='mt-14 flex flex-col tracking-wide '>
 
       {/* --------------------  upper part  ------------------------- */}
 
-      <div className=' bg-richblack-800 py-14 '>
+      <div className=' bg-richblack-800 py-14 border border-yellow-200 '>
 
         <div className='w-11/12 mx-auto flex gap-x-6 border px-8 relative'>
 
@@ -198,9 +213,9 @@ const CourseDetails = () => {
 
           {/* -----------------------------  right side  ------------------------------------ */}
 
-          <div className='border border-yellow-200 bg-richblack-700 min-w-[420px] w-[25%]'>
+          <div className='border border-yellow-200 bg-richblack-600 min-w-[420px]  w-[25%] absolute right-1'>
 
-            <CourseDetailCard course={response?.data[0]} setModalData={setModalData} handleBuyCourse={handleBuyCourse} modalData={modalData} />
+            <CourseDetailCard course={response?.data?.courseDetails} setModalData={setModalData} handleBuyCourse={handleBuyCourse} modalData={modalData} />
 
           </div>
 
@@ -213,20 +228,122 @@ const CourseDetails = () => {
 
       {/* -------------------- lower part --------------------------------- */}
 
-      <div >
+      <div className=' bg-richblack-900 py-4'>
 
-        <div className='w-10/12 mx-auto border'>
-           
+        <div className='w-11/12 mx-auto  bg-richblack-900 px-8 flex flex-col gap-y-8'>
+
+
+          {/* -------------- What you will learn section ------------------ */}
+
+          <div className='border border-richblack-700 w-[62%] px-5 py-6 flex flex-col gap-y-4'>
+            <h2 className='text-3xl text-richblack-5 font-medium'>
+              What You Will Learn
+            </h2>
+            <div className='text-[16px] text-richblack-50'>
+              {whatYouWillLearn}
+            </div>
+          </div>
+
+
+          {/* ---------------- Course Content ------------------------------- */}
+
+          <div className='flex flex-col gap-y-3 border border-richblack-700 w-[62%] px-5 '>
+
+            <div className='flex flex-col gap-y-3'>
+
+
+              <h2 className='text-2xl text-richblack-5 font-semibold'>Course Content</h2>
+
+              <div className='flex justify-between'>
+                <div className='flex gap-x-3 items-center text-sm text-richblack-50'>
+                  <span>{courseContent.length}  sections</span>
+                  <span>{totalNoOfLectures} lectures </span>
+                  <span> {response?.data?.totalDuration} total length</span>
+                </div>
+
+                <div>
+                  <button className='text-sm text-yellow-50' onClick={() => setIsActive([])}>
+                    Collapse all Sections
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            {/* ---------------- Course accordian Bar ---------------------------- */}
+
+            <div className='py-4'>
+
+                {
+                  courseContent?.map((section , index) => (
+                    <CourseAccordianBar
+                    section={section}
+                    isActive={isActive}
+                    handleActive={handleActive}
+                    key={index}
+                     />
+                  ))
+                }
+
+
+            </div>
+
+          </div>
+
+
+          {/* ------------------------- Author  ------------------------------------ */}
+
+          <div className=' flex flex-col gap-y-3'>
+            <h2 className='text-2xl font-semibold text-richblack-5'>Author</h2>
+
+            <div className='flex flex-col gap-y-2'>
+
+              <div className='flex gap-x-2 items-center'>
+                <img src={instructor?.image} alt="" className='w-[52px] h-[52px] rounded-full object-cover ' />
+                <p className='text-richblack-5 text-[16px] font-medium'>
+                  {
+                    `${instructor?.firstName} ${instructor?.lastName}`
+                  }
+                </p>
+              </div>
+              <div>
+                <p className='text-richblack-50 text-sm'>
+                  {instructor?.additionalDetails?.about}
+                </p>
+              </div>
+
+
+            </div>
+          </div>
+
+
 
         </div>
 
       </div>
+
+      <div>
+
+      </div>
+
+      {/* -----------------------Footer--------------------- */}
+      <div className='bg-richblack-800'>
+        <Footer></Footer>
+      </div>
+
 
 
       {
         modalData &&
         (<ConfirmModal modalData={modalData} setConfirmationModal={setModalData}  > </ConfirmModal>)
       }
+
+
+
 
 
     </div>
