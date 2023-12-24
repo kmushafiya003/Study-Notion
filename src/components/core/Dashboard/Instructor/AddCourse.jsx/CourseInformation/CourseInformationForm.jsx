@@ -424,17 +424,17 @@ const CourseInformationForm = () => {
 
                     <div>
                         <label className='label-style'>
-                            <p className='tracking-wide'>Benefits of the course <span className='text-pink-200'>*</span></p>
+                            <p className='tracking-wide'>What you will learn <span className='text-pink-200'>*</span></p>
                             <textarea
                                 name='courseBenefits'
-                                placeholder='Enter Benefits of the course'
+                                placeholder='Enter what you will learn'
                                 className='min-h-[140px] bg-richblack-700 py-3 rounded-lg px-3 w-full shadow-sm shadow-richblack-200 tracking-wider text-[14px] xs:text-[16px]'
                                 {...register("courseBenefits", { required: true })}
                             />
                             {
                                 errors.courseBenefits && (
                                     <span className='text-sm text-red-100  rounded-md px-3'>
-                                        Benefits of the course are required
+                                    This field is required 
                                     </span>
                                 )
                             }

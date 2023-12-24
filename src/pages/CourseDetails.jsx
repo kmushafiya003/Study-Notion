@@ -238,7 +238,7 @@ const CourseDetails = () => {
 
 
         {/* ------------------- For Small Screen ----------------------------------- */}
-        <div className='flex md:hidden flex-col  w-11/12 mx-auto gap-x-6 border sm:px-8  px-6'>
+        <div className='flex md:hidden flex-col items-center gap-y-10  w-11/12 mx-auto gap-x-6  sm:px-8  xs:px-6 px-0'>
 
           {/* ------------------- Thumbnail  ---------------- */}
 
@@ -248,7 +248,68 @@ const CourseDetails = () => {
 
           </div>
 
-         
+          {/* ----------------- Course details -------------------- */}
+
+          <div className='flex flex-col gap-y-3 border border-yellow-300 sm:px-6'>
+
+            {/* ---------- Heading -------------- */}
+
+            <h1 className='text-richblack-5 xs:text-left text-center  sm:text-2xl xs:text-xl text-lg font-medium'>{courseName}</h1>
+
+            {/* ------------------Description --------------- */}
+
+            <h2 className='text-sm text-richblack-200 font-normal xs:text-left text-center'>
+              {courseDescription}
+            </h2>
+
+            {/* ------------------Rating and reviews --------------- */}
+
+            <div className='flex xmd:flex-row flex-col xmd:gap-x-3 gap-y-3 px-3 xs:px-0 xs:text-left text-center '>
+
+              <div className='flex gap-x-2 items-center xs:justify-start justify-center'>
+                <span className='text-yellow-100 xmd:text-lg xs:text-[16px] text-sm'>{avgReviewCount}</span>
+                <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
+                <span className='text-richblack-25 xs:text-[16px] text-sm'>{`(${ratingAndReviews.length} reviews)`}</span>
+              </div>
+
+              <span className='text-richblack-25 xs:text-[16px] text-sm'>{`${studentsEnrolled.length} students enrolled`}</span>
+
+            </div>
+
+            {/* ------------------------- Instructor --------------------------- */}
+
+            <p className='text-richblack-25 xs:text-[16px] text-sm italic  xs:text-left text-center'>{`Created by ${instructor.firstName}  ${instructor.lastName}`}</p>
+
+            {/* ------------- Time and Language ---------------------------- */}
+
+            <div className='flex gap-x-4 xs:flex-row flex-col xs:text-left text-center gap-y-4'>
+
+              <p className='text-richblack-25  text-sm'>
+                Created at {formatDate(createdAt)}
+              </p>
+
+              <p className='flex items-center gap-x-2 text-richblack-25 text-sm xs:text-left justify-center'>
+                <MdLanguage className='text-lg' />
+                English
+              </p>
+
+            </div>
+
+          </div>
+
+          {/* ---------------- horizontal line ----------------------- */}
+
+          <div className='h-[1px] w-full  bg-richblack-500'> </div>
+
+          {/* ------------------ Card ( add to Cart $ Buy Now) ------------------------- */}
+   
+           <div className='w-[90%] xs:w-[95%} bg-richblack-600 rounded-lg py-2 px-3 border border-richblack-200'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, saepe fuga nesciunt sunt quos sequi non esse obcaecati veritatis! Dignissimos est minima nesciunt, consectetur expedita esse quae totam vitae, ea, repellat eaque numquam natus officiis neque in porro sed illo amet! Illum aut unde quaerat quos enim fugit atque asperiores quas perspiciatis. Labore, aperiam veritatis commodi ex reprehenderit, quaerat beatae, earum quidem quod nemo aut perspiciatis unde facere eligendi laboriosam a cupiditate autem et obcaecati modi ab. Fugit tempore illum atque sapiente explicabo error, labore asperiores odio. Velit, fugit possimus animi enim odio perferendis molestiae totam veniam doloremque nostrum no 
+
+           </div>
+
+
+
         </div>
 
       </div>
@@ -306,16 +367,16 @@ const CourseDetails = () => {
 
             <div className='py-4'>
 
-                {
-                  courseContent?.map((section , index) => (
-                    <CourseAccordianBar
+              {
+                courseContent?.map((section, index) => (
+                  <CourseAccordianBar
                     section={section}
                     isActive={isActive}
                     handleActive={handleActive}
                     key={index}
-                     />
-                  ))
-                }
+                  />
+                ))
+              }
 
 
             </div>

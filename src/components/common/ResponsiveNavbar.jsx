@@ -134,7 +134,7 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
                                         .split(" ")
                                         .join("-")
                                         .toLowerCase()}`}
-                                         key={index} className='rounded-lg bg-transparent py-3 pl-4 hover:bg-richblack-50'>
+                                         key={index} className='rounded-lg bg-transparent py-3 pl-4 pr-2 hover:bg-blue-300'>
                                         {subLink.name}
                                       </Link>
                                     )
