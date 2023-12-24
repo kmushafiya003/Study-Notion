@@ -171,9 +171,9 @@ const CourseDetails = () => {
 
       <div className=' bg-richblack-800 py-14 border border-yellow-200 '>
 
-        {/* ------------------- For large Screen ------------------------------- */}
+        {/* ------------------- For large Screen (max to 768px) ------------------------------- */}
 
-        <div className='hidden md:flex  w-11/12 mx-auto gap-x-6 border xl:px-8 lg:px-4 px-0  relative'>
+        <div className='hidden md:flex  w-11/12 mx-auto gap-x-6  xl:px-8 lg:px-4 px-0  relative'>
 
           {/* ------------------------ left side  ----------------------------- */}
 
@@ -250,7 +250,7 @@ const CourseDetails = () => {
 
           {/* ----------------- Course details -------------------- */}
 
-          <div className='flex flex-col gap-y-3 border border-yellow-300 sm:px-6'>
+          <div className='flex flex-col gap-y-3  sm:px-6'>
 
             {/* ---------- Heading -------------- */}
 
@@ -303,8 +303,10 @@ const CourseDetails = () => {
 
           {/* ------------------ Card ( add to Cart $ Buy Now) ------------------------- */}
    
-           <div className='w-[90%] xs:w-[95%} bg-richblack-600 rounded-lg py-2 px-3 border border-richblack-200'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, saepe fuga nesciunt sunt quos sequi non esse obcaecati veritatis! Dignissimos est minima nesciunt, consectetur expedita esse quae totam vitae, ea, repellat eaque numquam natus officiis neque in porro sed illo amet! Illum aut unde quaerat quos enim fugit atque asperiores quas perspiciatis. Labore, aperiam veritatis commodi ex reprehenderit, quaerat beatae, earum quidem quod nemo aut perspiciatis unde facere eligendi laboriosam a cupiditate autem et obcaecati modi ab. Fugit tempore illum atque sapiente explicabo error, labore asperiores odio. Velit, fugit possimus animi enim odio perferendis molestiae totam veniam doloremque nostrum no 
+           <div className='w-[90%] xs:w-[95%} bg-richblack-600 rounded-lg py-3 px-4 border border-richblack-200'>
+
+           <CourseDetailCard course={response?.data?.courseDetails} setModalData={setModalData} handleBuyCourse={handleBuyCourse} modalData={modalData} />
+
 
            </div>
 
