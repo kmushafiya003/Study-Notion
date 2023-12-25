@@ -13,7 +13,7 @@ const ConfirmModal = ({ modalData  , setConfirmationModal }) => {
 
     console.log("In the confirm Modal")
     return (
-        <div className='fixed inset-0 grid lg:place-items-center justify-center items-start z-[9999] overflow-auto bg-white bg-opacity-10  backdrop-blur-sm  border-4 border-blue-100 text-richblack-5' >
+        <div className='fixed inset-0 grid lg:place-items-center justify-center items-start z-[9999] overflow-auto bg-white bg-opacity-10  backdrop-blur-sm text-richblack-5' >
 
             <div className='mt-64  lg:mt-0  border border-richblack-400 bg-richblue-900 rounded-lg p-8 max-w-[280px] xxs:max-w-[320px] xs:max-w-[400px] flex flex-col gap-4' ref={myRef} onClick={(event) => event.stopPropagation()} >
 

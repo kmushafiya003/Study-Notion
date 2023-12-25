@@ -37,7 +37,7 @@ const ResponsiveNavbar = ({ menu, setMenu, matchRoute, subLinks }) => {
     return (
 
         <>
-            <div className={`visible sm:invisible  fixed inset-0  z-[9999] overflow-auto bg-white bg-opacity-10  backdrop-blur-sm  border-4 border-blue-100 text-richblack-5 transiton-all duration-300
+            <div className={`visible sm:invisible  fixed inset-0  z-[9999] overflow-auto bg-white bg-opacity-10  backdrop-blur-sm  text-richblack-5 transiton-all duration-300
     
         `}>
 

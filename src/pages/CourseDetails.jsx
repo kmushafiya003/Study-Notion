@@ -13,6 +13,7 @@ import { formatDate } from '../services/formatDate'
 import CourseDetailCard from '../components/core/CourseDetail/CourseDetailCard';
 import Footer from '../components/common/Footer'
 import CourseAccordianBar from '../components/core/CourseDetail/CourseAccordianBar';
+import Reviews from '../components/core/Home/Reviews'
 
 const CourseDetails = () => {
 
@@ -169,7 +170,7 @@ const CourseDetails = () => {
 
       {/* --------------------  upper part ------------------------- */}
 
-      <div className=' bg-richblack-800 py-14 border border-yellow-200 '>
+      <div className=' bg-richblack-800 py-14  '>
 
         {/* ------------------- For large Screen (max to 768px) ------------------------------- */}
 
@@ -177,7 +178,7 @@ const CourseDetails = () => {
 
           {/* ------------------------ left side  ----------------------------- */}
 
-          <div className='xl:w-[65%] lg:w-[62%] mmd:w-[58%] smd:w-[55%] w-[52%] border border-pink-300 flex flex-col gap-y-4'>
+          <div className='xl:w-[65%] lg:w-[62%] mmd:w-[58%] smd:w-[55%] w-[52%]  flex flex-col gap-y-4'>
 
             {/* ------------------- Course Name ---------------------- */}
 
@@ -226,7 +227,7 @@ const CourseDetails = () => {
 
           {/* -----------------------------  right side  ------------------------------------ */}
 
-          <div className=' bg-richblack-600 xl:min-w-[400px] xlg:w-[360px] lg:w-[320px] border border-yellow-200  absolute right-1 rounded-md'>
+          <div className=' bg-richblack-600 xl:min-w-[400px] xlg:w-[360px] lg:w-[320px]  absolute right-[0] xmd:right-1 rounded-md'>
 
             <CourseDetailCard course={response?.data?.courseDetails} setModalData={setModalData} handleBuyCourse={handleBuyCourse} modalData={modalData} />
 
@@ -319,18 +320,18 @@ const CourseDetails = () => {
 
       {/* -------------------- lower part --------------------------------- */}
 
-      <div className=' bg-richblack-900 py-4 border border-pink-300'>
+      <div className=' bg-richblack-900 xmd:mt-0 mt-0 md:mt-16 pt-4 pb-4 '>
 
         <div className='w-11/12 mx-auto  bg-richblack-900 xl:px-8 lg:px-4 px-0 flex flex-col gap-y-8'>
 
 
           {/* -------------- What you will learn section ------------------ */}
 
-          <div className='border border-richblack-700 w-[62%] px-5 py-6 flex flex-col gap-y-4'>
-            <h2 className='text-3xl text-richblack-5 font-medium'>
+          <div className='border border-richblack-700 xmd:w-[62%] w-full  px-5 py-6 flex flex-col gap-y-4'>
+            <h2 className='md:text-3xl xs:text-2xl text-xl text-richblack-5 font-medium'>
               What You Will Learn
             </h2>
-            <div className='text-[16px] text-richblack-50'>
+            <div className='md:text-[16px] text-sm text-richblack-50'>
               {whatYouWillLearn}
             </div>
           </div>
@@ -338,18 +339,18 @@ const CourseDetails = () => {
 
           {/* ---------------- Course Content ------------------------------- */}
 
-          <div className='flex flex-col gap-y-3 border border-richblack-700 w-[62%] px-5 '>
+          <div className='flex flex-col gap-y-3 border border-richblack-700 xmd:w-[62%] w-full  px-5 py-6'>
 
             <div className='flex flex-col gap-y-3'>
 
 
-              <h2 className='text-2xl text-richblack-5 font-semibold'>Course Content</h2>
+              <h2 className='md:text-2xl xs:text-xl text-lg text-richblack-5 font-semibold'>Course Content</h2>
 
               <div className='flex justify-between'>
                 <div className='flex gap-x-3 items-center text-sm text-richblack-50'>
-                  <span>{courseContent.length}  sections</span>
+                  <span className='xsm:flex hidden'>{courseContent.length}  sections</span>
                   <span>{totalNoOfLectures} lectures </span>
-                  <span> {response?.data?.totalDuration} total length</span>
+                  <span className='xs:flex hidden'> {response?.data?.totalDuration} total length</span>
                 </div>
 
                 <div>
@@ -367,7 +368,7 @@ const CourseDetails = () => {
 
             {/* ---------------- Course accordian Bar ---------------------------- */}
 
-            <div className='py-4'>
+            <div className='md:py-4 py-3'>
 
               {
                 courseContent?.map((section, index) => (
@@ -388,7 +389,7 @@ const CourseDetails = () => {
 
           {/* ------------------------- Author  ------------------------------------ */}
 
-          <div className='mb-6  flex flex-col gap-y-3'>
+          <div className='mb-6  flex flex-col gap-y-3 px-2'>
             <h2 className='text-2xl font-semibold text-richblack-5'>Author</h2>
 
             <div className='flex flex-col gap-y-2'>
@@ -417,9 +418,8 @@ const CourseDetails = () => {
 
       </div>
 
-      <div>
-
-      </div>
+         {/* -------------------  Reviews -------------------------------- */}
+         <Reviews></Reviews>
 
       {/* -----------------------Footer--------------------- */}
       <div className='bg-richblack-800'>

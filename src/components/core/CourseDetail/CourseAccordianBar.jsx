@@ -36,7 +36,7 @@ const CourseAccordianBar = ({ section, isActive, handleActive }) => {
 
             {/* ------------------ sections ----------------------- */}
 
-            <div className='py-4 px-8  cursor-pointer flex justify-between transition-[0.3s]' onClick={() => {
+            <div className='py-4 md:px-8 xs:px-6 px-4 cursor-pointer flex justify-between transition-[0.3s]' onClick={() => {
                 handleActive(section._id)
             }}>
 

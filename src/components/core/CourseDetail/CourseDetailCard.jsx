@@ -157,7 +157,7 @@ const CourseDetailCard = ({ course,setModalData, handleBuyCourse }) => {
 
       {/* --------------- Money back line --------------------- */}
 
-      <div className='flex justify-center'>
+      <div className='xmd:flex hidden justify-center '>
         <p className='text-sm text-richblack-25'>
           30-Day Money-Back Guarantee
         </p>

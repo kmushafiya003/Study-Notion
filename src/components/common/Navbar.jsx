@@ -163,15 +163,20 @@ const Navbar = () => {
         </nav>
 
         {/* ------------------ Login / Signup  / Dashboard / Cart  ------------------- */}
-        <div className='flex xs:gap-x-5 md:gap-x-3 lg:gap-x-5 gap-x-2  items-center '>
+        <div className='flex xs:gap-x-5 md:gap-x-3 lg:gap-x-5 gap-x-4  items-center '>
+
+
+         {/* -------------------- cart ---------------------------- */}
 
           {
+
+
             user && user?.accountType === ACCOUNT_TYPE.STUDENT && (
 
               <Link to={"/dashboard/cart"} className='relative'>
                 {
                   totalItems > 0 && (
-                    <span className='w-3 h-3 p-[10px] rounded-full flex justify-center items-center text-[12px] text-richblack-5 bg-richblack-500 absolute left-[60%] top-[-35%] font-semibold'>{totalItems}</span>
+                    <span className='w-3 h-3 p-[10px] rounded-full flex justify-center items-center text-[12px] text-richblack-5 bg-richblack-500 absolute xs:left-[60%] left-[50%] top-[-35%] font-semibold'>{totalItems}</span>
                   )
                 }
                 <AiOutlineShoppingCart className='text-[22px] ' />
@@ -179,6 +184,8 @@ const Navbar = () => {
               </Link>
             )
           }
+
+          {/* ----------------------- Login -------------------------------- */}
           {
             token === null && (
               <Link to="/login">
